@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { useUploadProgress } from "./upload-progress";
 
 const RADIUS = 5;
@@ -60,7 +61,7 @@ export function UploadProgressIndicator({
 
 	// Below 1% the pipeline is still converting/thumbnailing — no bytes moving.
 	const label =
-		fraction < 0.01 ? "Preparing" : `${Math.round(fraction * 100)}%`;
+		fraction < 0.01 ? t("Preparing") : `${Math.round(fraction * 100)}%`;
 
 	if (variant === "overlay") {
 		return (

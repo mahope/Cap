@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { verifyVideoPassword } from "@/actions/videos/password";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { PasswordDoodle } from "@/components/paper-state/doodles";
 import {
 	PaperState,
@@ -32,8 +33,8 @@ export function PasswordGate({ videoId }: { videoId: Video.VideoId }) {
 		<PaperState
 			homeHref={buildEnv.NEXT_PUBLIC_WEB_URL}
 			doodle={<PasswordDoodle />}
-			title="This video is password protected"
-			lede="Enter the password the owner gave you to start watching."
+			title={t("This video is password protected")}
+			lede={t("Enter the password the owner gave you to start watching.")}
 		>
 			<form
 				className={styles.form}
@@ -45,8 +46,8 @@ export function PasswordGate({ videoId }: { videoId: Video.VideoId }) {
 				<input
 					className={styles.input}
 					type="password"
-					aria-label="Password"
-					placeholder="Password"
+					aria-label={t("Password")}
+					placeholder={t("Password")}
 					autoComplete="current-password"
 					value={password}
 					aria-invalid={failed}
@@ -62,11 +63,11 @@ export function PasswordGate({ videoId }: { videoId: Video.VideoId }) {
 					className={styles.cta}
 					disabled={busy || !password.trim()}
 				>
-					{busy ? "Checking…" : "Watch video"}
+					{busy ? t("Checking…") : t("Watch video")}
 				</button>
 				{failed && (
 					<p className={styles.error} role="alert">
-						That password didn't work. Check it and try again.
+						{t("That password didn't work. Check it and try again.")}
 					</p>
 				)}
 			</form>

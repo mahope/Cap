@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatClock } from "../timeline-format";
 import { DevicePill } from "./DevicePill";
 import { MicMuteButton } from "./MicMuteButton";
@@ -118,7 +119,7 @@ export function CameraRecorderPanel({
 						/>
 						{formatClock(durationMs / 1000)}
 						{phase === "paused" && (
-							<span className="text-white/70">Paused</span>
+							<span className="text-white/70">{t("Paused")}</span>
 						)}
 					</span>
 				)}
@@ -133,7 +134,7 @@ export function CameraRecorderPanel({
 							selectedId={devices.selectedCameraId}
 							onSelect={handleCameraSelect}
 							disabled={phase !== "ready" || switchingCamera}
-							title={live ? "Stop recording to switch cameras" : undefined}
+							title={live ? t("Stop recording to switch cameras") : undefined}
 							className="min-w-0 flex-1"
 						/>
 					)}
@@ -175,7 +176,7 @@ export function CameraRecorderPanel({
 					onClick={handleCancel}
 					className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12"
 				>
-					Cancel
+					{t("Cancel")}
 				</button>
 				{live ? (
 					<button
@@ -184,7 +185,7 @@ export function CameraRecorderPanel({
 						className="flex h-7 items-center gap-1.5 rounded-lg bg-gray-12 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90"
 					>
 						<span className="inline-flex size-2 rounded-sm bg-red-400" />
-						Stop
+						{t("Stop")}
 					</button>
 				) : (
 					<button
@@ -193,7 +194,7 @@ export function CameraRecorderPanel({
 						disabled={phase !== "ready" || switchingCamera}
 						className="h-7 rounded-lg bg-blue-9 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
 					>
-						Start
+						{t("Start")}
 					</button>
 				)}
 			</div>

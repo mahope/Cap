@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 const PLAYER_WIDTH = 1280;
 const PLAYER_HEIGHT = 720;
@@ -90,8 +91,8 @@ export const buildShareVideoMetadata = ({
 		webUrl,
 		canonicalWebUrl,
 	});
-	const title = `${name} | Cap Recording`;
-	const description = "Watch this video on Cap";
+	const title = t("{name} | Cap Recording", { name });
+	const description = t("Watch this video on Cap");
 	const hasDimensions =
 		width != null && height != null && width > 0 && height > 0;
 	const playerWidth = hasDimensions ? width : PLAYER_WIDTH;

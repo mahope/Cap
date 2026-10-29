@@ -3,6 +3,7 @@
 import type { ImageUpload } from "@cap/web-domain";
 import clsx from "clsx";
 import { memo } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { BranchAnchor, NODE_BASE_CLASS } from "./TimelineBranch";
 import { NODE_SIZE } from "./timeline-constants";
@@ -41,7 +42,10 @@ export const TimelineBranchCluster = memo(function TimelineBranchCluster({
 	reduceMotion,
 }: TimelineBranchClusterProps) {
 	const overflow = total - faces.length;
-	const label = `${total} comments at ${timeLabel}`;
+	const label = t("{total} comments at {time}", {
+		total,
+		time: timeLabel,
+	});
 
 	return (
 		<BranchAnchor

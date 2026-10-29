@@ -1,6 +1,7 @@
 "use client";
 
 import { type RefObject, useEffect, useRef, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import styles from "./EarlyUploadOverlay.module.css";
 import { formatClock } from "./early-playback";
 
@@ -78,11 +79,11 @@ export function EarlyUploadOverlay({
 	const title =
 		target === null
 			? isLoading
-				? "Loading the rest"
-				: "The rest is still uploading"
+				? t("Loading the rest")
+				: t("The rest is still uploading")
 			: isLoading
-				? `Loading ${formatClock(target)}`
-				: `${formatClock(target)} is still uploading`;
+				? t("Loading {time}", { time: formatClock(target) })
+				: t("{time} is still uploading", { time: formatClock(target) });
 	const total = recorded !== null && recorded > 0 ? recorded : null;
 	const shownSeconds = total === null ? shown : Math.min(shown, total);
 
@@ -96,8 +97,11 @@ export function EarlyUploadOverlay({
 				<p className={styles.title}>{title}</p>
 				<p className={styles.detail}>
 					{total === null
-						? `${formatClock(shownSeconds)} uploaded so far`
-						: `${formatClock(shownSeconds)} of ${formatClock(total)} uploaded`}
+						? t("{shown} uploaded so far", { shown: formatClock(shownSeconds) })
+						: t("{shown} of {total} uploaded", {
+								shown: formatClock(shownSeconds),
+								total: formatClock(total),
+							})}
 				</p>
 				{total !== null && (
 					<div className={styles.bar} aria-hidden>
@@ -111,8 +115,9 @@ export function EarlyUploadOverlay({
 				)}
 				{stalled && (
 					<p className={styles.hint}>
-						Keep Cap open on the computer that recorded this so the rest can
-						upload.
+						{t(
+							"Keep Cap open on the computer that recorded this so the rest can upload.",
+						)}
 					</p>
 				)}
 			</div>

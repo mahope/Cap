@@ -2,6 +2,7 @@
 
 import { classNames } from "@cap/utils";
 import { motion, useReducedMotion } from "motion/react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 export type ShareView = "classic" | "timeline";
 
@@ -16,6 +17,7 @@ interface ShareViewToggleProps {
 	disabled?: boolean;
 	/** Warms the lazily-loaded timeline chunk before the user commits. */
 	prefetch?: () => void;
+	localize?: boolean;
 }
 
 export function ShareViewToggle({
@@ -23,6 +25,7 @@ export function ShareViewToggle({
 	onChange,
 	disabled = false,
 	prefetch,
+	localize = false,
 }: ShareViewToggleProps) {
 	const reduceMotion = useReducedMotion() ?? false;
 
@@ -30,13 +33,14 @@ export function ShareViewToggle({
 		<div className="inline-flex items-center gap-0.5 p-0.5 rounded-full border border-gray-5 bg-gray-3">
 			{OPTIONS.map((option) => {
 				const active = option.value === view;
+				const label = localize ? t(option.label) : option.label;
 				return (
 					<button
 						key={option.value}
 						type="button"
 						disabled={disabled}
 						aria-pressed={active}
-						title={`${option.label} (T)`}
+						title={`${label} (T)`}
 						onClick={() => {
 							if (active) return;
 							onChange(option.value);
@@ -61,7 +65,7 @@ export function ShareViewToggle({
 								}
 							/>
 						)}
-						<span className="relative z-10">{option.label}</span>
+						<span className="relative z-10">{label}</span>
 					</button>
 				);
 			})}

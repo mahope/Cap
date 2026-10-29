@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 const OtpForm = ({
 	email,
@@ -75,7 +76,7 @@ const OtpForm = ({
 	const handleVerify = useMutation({
 		mutationFn: async (pastedCode?: string) => {
 			const otpCode = pastedCode ?? code.join("");
-			if (otpCode.length !== 6) throw "Please enter a complete 6-digit code";
+			if (otpCode.length !== 6) throw t("Please enter a complete 6-digit code");
 
 			await fetch(
 				`/api/auth/callback/email?email=${encodeURIComponent(normalizedEmail)}&token=${encodeURIComponent(otpCode)}&callbackUrl=${encodeURIComponent("/dashboard")}`,
@@ -86,19 +87,19 @@ const OtpForm = ({
 			if (!session?.user) {
 				setCode(["", "", "", "", "", ""]);
 				inputRefs.current[0]?.focus();
-				throw "Invalid code. Please try again.";
+				throw t("Invalid code. Please try again.");
 			}
 		},
 		onSuccess: () => {
 			router.refresh();
-			toast.success("Sign in successful!");
+			toast.success(t("Sign in successful!"));
 			onClose();
 		},
 		onError: (e) => {
 			if (typeof e === "string") {
 				toast.error(e);
 			} else {
-				toast.error("An error occurred. Please try again.");
+				toast.error(t("An error occurred. Please try again."));
 			}
 		},
 	});
@@ -113,7 +114,12 @@ const OtpForm = ({
 					const remainingSeconds = Math.ceil(
 						(waitTime - timeSinceLastRequest) / 1000,
 					);
-					throw `Please wait ${remainingSeconds} seconds before requesting a new code`;
+					throw t(
+						"Please wait {seconds} seconds before requesting a new code",
+						{
+							seconds: remainingSeconds,
+						},
+					);
 				}
 			}
 
@@ -123,11 +129,13 @@ const OtpForm = ({
 			});
 
 			if (result?.error) {
-				throw "Please wait 30 seconds before requesting a new code";
+				throw t("Please wait {seconds} seconds before requesting a new code", {
+					seconds: 30,
+				});
 			}
 		},
 		onSuccess: () => {
-			toast.success("A new code has been sent to your email!");
+			toast.success(t("A new code has been sent to your email!"));
 			setCode(["", "", "", "", "", ""]);
 			inputRefs.current[0]?.focus();
 			setLastResendTime(Date.now());
@@ -136,7 +144,7 @@ const OtpForm = ({
 			if (typeof e === "string") {
 				toast.error(e);
 			} else {
-				toast.error("An error occurred. Please try again.");
+				toast.error(t("An error occurred. Please try again."));
 			}
 		},
 	});
@@ -183,7 +191,7 @@ const OtpForm = ({
 				}}
 				disabled={code.some((digit) => !digit) || isVerifying}
 			>
-				{isVerifying ? "Verifying..." : "Verify Code"}
+				{isVerifying ? t("Verifying...") : t("Verify Code")}
 			</Button>
 
 			<div className="text-center">
@@ -196,8 +204,8 @@ const OtpForm = ({
 					className="text-sm underline transition-colors text-gray-10 hover:text-gray-12"
 				>
 					{handleResend.isPending
-						? "Sending..."
-						: "Didn't receive the code? Resend"}
+						? t("Sending...")
+						: t("Didn't receive the code? Resend")}
 				</button>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatClock } from "../timeline-format";
 import { DevicePill } from "./DevicePill";
 import { PauseResumeButton } from "./PauseResumeButton";
@@ -116,18 +117,24 @@ export function VoiceRecorderPanel({
 							className="size-4 fill-current"
 							aria-hidden
 						>
-							<title>Voice</title>
+							<title>{t("Voice")}</title>
 							<path d="M8 2a2 2 0 0 0-2 2v4a2 2 0 1 0 4 0V4a2 2 0 0 0-2-2ZM4.4 7.4a.6.6 0 0 0-1.2 0 4.8 4.8 0 0 0 4.2 4.76V13.4H5.8a.6.6 0 1 0 0 1.2h4.4a.6.6 0 1 0 0-1.2H8.6v-1.24a4.8 4.8 0 0 0 4.2-4.76.6.6 0 1 0-1.2 0 3.6 3.6 0 1 1-7.2 0Z" />
 						</svg>
 					</span>
 					<p className="text-xs leading-relaxed text-gray-11">
 						{phase === "denied"
-							? "Microphone is blocked. Enable it in your browser settings, then try again."
+							? t(
+									"Microphone is blocked. Enable it in your browser settings, then try again.",
+								)
 							: phase === "requesting"
-								? "Waiting for microphone access…"
+								? t("Waiting for microphone access…")
 								: devices.mics.length > 0
-									? "Pick a microphone, then click Start to record your voice note."
-									: "Click Start and your browser will ask for microphone access."}
+									? t(
+											"Pick a microphone, then click Start to record your voice note.",
+										)
+									: t(
+											"Click Start and your browser will ask for microphone access.",
+										)}
 					</p>
 				</div>
 			)}
@@ -161,11 +168,11 @@ export function VoiceRecorderPanel({
 						<button
 							type="button"
 							onClick={handleRestart}
-							aria-label="Restart recording"
-							title="Start the take over"
+							aria-label={t("Restart recording")}
+							title={t("Start the take over")}
 							className="h-7 rounded-lg px-2.5 text-xs text-gray-10 ring-1 ring-gray-4 transition-colors hover:bg-gray-2 hover:text-gray-12"
 						>
-							Restart
+							{t("Restart")}
 						</button>
 					</>
 				)}
@@ -178,19 +185,19 @@ export function VoiceRecorderPanel({
 							type="button"
 							onClick={handleCancel}
 							disabled={phase === "processing"}
-							aria-label="Discard voice note"
+							aria-label={t("Discard voice note")}
 							className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12 disabled:opacity-40"
 						>
-							Discard
+							{t("Discard")}
 						</button>
 						<button
 							type="button"
 							onClick={() => void stop()}
 							disabled={phase === "processing"}
-							aria-label="Send voice note"
+							aria-label={t("Send voice note")}
 							className="h-7 rounded-lg bg-blue-9 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
 						>
-							Send
+							{t("Send")}
 						</button>
 					</>
 				) : (
@@ -200,7 +207,7 @@ export function VoiceRecorderPanel({
 							onClick={handleCancel}
 							className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12"
 						>
-							Cancel
+							{t("Cancel")}
 						</button>
 						<button
 							type="button"
@@ -208,7 +215,7 @@ export function VoiceRecorderPanel({
 							disabled={phase === "requesting"}
 							className="h-7 rounded-lg bg-blue-9 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
 						>
-							{phase === "denied" ? "Try again" : "Start"}
+							{phase === "denied" ? t("Try again") : t("Start")}
 						</button>
 					</>
 				)}

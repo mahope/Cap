@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatPlayerTime } from "@/lib/player-time";
 
 type AiGenerationStatus =
@@ -45,7 +46,7 @@ const SummaryChapters = ({
 		<div className="p-4 bg-white rounded-2xl border border-gray-3">
 			{hasSummary && (
 				<>
-					<h3 className="text-lg font-medium">Summary</h3>
+					<h3 className="text-lg font-medium">{t("Summary")}</h3>
 					<div className="text-sm prose prose-sm prose-gray max-w-none prose-p:my-2 prose-ul:my-2 prose-li:my-0 prose-strong:text-gray-12">
 						<ReactMarkdown>{aiData.summary}</ReactMarkdown>
 					</div>
@@ -54,7 +55,7 @@ const SummaryChapters = ({
 
 			{hasChapters && (
 				<div className={hasSummary ? "mt-6" : ""}>
-					<h3 className="mb-2 text-lg font-medium">Chapters</h3>
+					<h3 className="mb-2 text-lg font-medium">{t("Chapters")}</h3>
 					<div className="divide-y">
 						{aiData.chapters?.map((chapter) => (
 							<button

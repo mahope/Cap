@@ -43,6 +43,7 @@ import {
 	type OrganizationSettings,
 	type Spaces,
 } from "@/app/(org)/dashboard/dashboard-data";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { isAiConfigured } from "@/lib/ai/provider";
 import { completeDesktopSegmentsManifestAndQueue } from "@/lib/desktop-segments-recovery";
 import { isEarlyInstantPlaybackEnabled } from "@/lib/early-instant-playback";
@@ -288,8 +289,8 @@ export async function generateMetadata(
 				onNone: () =>
 					awaitRecording
 						? {
-								title: "Cap: Preparing Video",
-								description: "This recording is being made available.",
+								title: t("Cap: Preparing Video"),
+								description: t("This recording is being made available."),
 								robots: "noindex, nofollow",
 							}
 						: notFound(),
@@ -315,8 +316,8 @@ export async function generateMetadata(
 		Effect.catchTags({
 			PolicyDenied: () =>
 				Effect.succeed({
-					title: "Cap: This video is restricted",
-					description: "This video has restricted access.",
+					title: t("Cap: This video is restricted"),
+					description: t("This video has restricted access."),
 					openGraph: {
 						images: [{ url: ogImageUrl, width: 1200, height: 630 }],
 					},
@@ -324,15 +325,15 @@ export async function generateMetadata(
 				}),
 			VerifyVideoPasswordError: () =>
 				Effect.succeed({
-					title: "Cap: Password Protected Video",
-					description: "This video is password protected.",
+					title: t("Cap: Password Protected Video"),
+					description: t("This video is password protected."),
 					openGraph: {
 						images: [{ url: ogImageUrl, width: 1200, height: 630 }],
 					},
 					twitter: {
 						card: "summary_large_image",
-						title: "Cap: Password Protected Video",
-						description: "This video is password protected.",
+						title: t("Cap: Password Protected Video"),
+						description: t("This video is password protected."),
 						images: [ogImageUrl],
 					},
 					robots: "noindex, nofollow",

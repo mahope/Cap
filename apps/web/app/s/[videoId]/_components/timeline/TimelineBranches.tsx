@@ -2,6 +2,7 @@
 
 import { AnimatePresence, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { CommentType } from "../../Share";
 import { TimelineBranch } from "./TimelineBranch";
 import { TimelineBranchCard } from "./TimelineBranchCard";
@@ -145,7 +146,7 @@ export function TimelineBranches({
 						glyph={item.node.comment.type}
 						content={item.node.comment.content}
 						avatarUrl={item.node.comment.authorImage ?? null}
-						authorName={item.node.comment.authorName || "Someone"}
+						authorName={item.node.comment.authorName || t("Someone")}
 						timeLabel={item.timeLabel}
 						sending={item.node.comment.sending === true}
 						delay={item.delay}
@@ -202,7 +203,7 @@ function facesOf(node: Extract<BranchNode<CommentType>, { kind: "cluster" }>) {
 	if (cached) return cached;
 	const faces = node.comments.slice(0, CLUSTER_FACES).map((comment) => ({
 		id: comment.id,
-		name: comment.authorName || "Someone",
+		name: comment.authorName || t("Someone"),
 		image: comment.authorImage ?? null,
 	}));
 	facesCache.set(node, faces);

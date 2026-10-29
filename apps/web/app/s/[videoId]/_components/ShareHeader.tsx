@@ -52,6 +52,7 @@ import type { VideoStatusResult } from "@/actions/videos/get-status";
 import { useDashboardContext } from "@/app/(org)/dashboard/DashboardContext";
 import type { Spaces } from "@/app/(org)/dashboard/dashboard-data";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { formatNumber, fromNow, t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { Tooltip } from "@/components/Tooltip";
 import type { ShareDashboardDestination } from "@/lib/share-dashboard-destination";
@@ -65,7 +66,6 @@ import type { SharePageBranding, VideoData } from "../types";
 import { DashboardBackLink } from "./DashboardBackLink";
 import { describeShareAudience } from "./share-audience";
 import { useVideoDownload } from "./use-video-download";
-import { fromNow } from "./utils/from-now";
 import { VideoDownloadMenu } from "./VideoDownloadMenu";
 
 /**
@@ -132,9 +132,9 @@ const DuplicateCapMenuItem = dynamic(() => import("./DuplicateCapMenuItem"), {
  * shares the row with the video's title and has to stay out of its way.
  */
 const SIGNED_OUT_LINKS = [
-	{ label: "Download", href: "/download" },
-	{ label: "Blog", href: "/blog" },
-	{ label: "Pricing", href: "/pricing" },
+	{ label: t("Download"), href: "/download" },
+	{ label: t("Blog"), href: "/blog" },
+	{ label: t("Pricing"), href: "/pricing" },
 ];
 
 /**
@@ -474,7 +474,7 @@ export const ShareHeader = ({
 	const copyShareLink = (url: string) =>
 		copyRichVideoLink({
 			url,
-			title: displayTitle || "Cap Recording",
+			title: displayTitle || t("Cap Recording"),
 			previewImageUrl: videoPreviewImageUrl(webUrl, data.id),
 		});
 
@@ -541,7 +541,7 @@ export const ShareHeader = ({
 			return (
 				<span className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-gray-4 px-3 text-xs font-medium text-gray-11">
 					<Users className="size-3.5 text-gray-10" aria-hidden />
-					Shared with you
+					{t("Shared with you")}
 				</span>
 			);
 		}
@@ -584,7 +584,7 @@ export const ShareHeader = ({
 			className={clsx("gap-1.5 px-3", className)}
 			size="xs"
 			variant="blue"
-			aria-label="Share this Cap"
+			aria-label={t("Share this Cap")}
 			onClick={openShareLinkDialog}
 			onPointerEnter={() => {
 				void importShareLinkDialog();
@@ -594,7 +594,7 @@ export const ShareHeader = ({
 			}}
 		>
 			<FontAwesomeIcon className="size-3" icon={faShare} />
-			Share
+			{t("Share")}
 		</Button>
 	);
 
@@ -621,7 +621,7 @@ export const ShareHeader = ({
 					variant="gray"
 					size="xs"
 					className={clsx(ACTION_BAR_BUTTON_CLASS, "w-full")}
-					aria-label="Copy link"
+					aria-label={t("Copy link")}
 					onClick={handleCopyClick}
 				>
 					{linkCopied ? (
@@ -630,7 +630,7 @@ export const ShareHeader = ({
 						<Copy className="size-3.5 shrink-0" />
 					)}
 					<span className="truncate">
-						{linkCopied ? "Copied" : "Copy link"}
+						{linkCopied ? t("Copied") : t("Copy link")}
 					</span>
 				</Button>
 			)}
@@ -647,7 +647,7 @@ export const ShareHeader = ({
 						onClick={() => handleCopyLink(false)}
 					>
 						<Copy className="w-3.5 h-3.5 shrink-0" />
-						Copy link
+						{t("Copy link")}
 					</button>
 					<button
 						type="button"
@@ -655,7 +655,7 @@ export const ShareHeader = ({
 						onClick={() => handleCopyLink(true)}
 					>
 						<Clock className="w-3.5 h-3.5 shrink-0" />
-						Copy link at {formatTimestamp(capturedTime)}
+						{t("Copy link at {time}", { time: formatTimestamp(capturedTime) })}
 					</button>
 				</div>
 			)}
@@ -752,7 +752,7 @@ export const ShareHeader = ({
 						href="/login"
 						className="text-[13px] text-gray-11 transition-colors hover:text-gray-12"
 					>
-						Log in
+						{t("Log in")}
 					</a>
 					<Button
 						variant="dark"
@@ -760,7 +760,7 @@ export const ShareHeader = ({
 						href={`/signup?ref=video_${data.id}`}
 						className="h-8 rounded-full px-3 text-xs"
 					>
-						Get Cap free
+						{t("Get Cap free")}
 					</Button>
 				</div>
 			</nav>
@@ -806,7 +806,7 @@ export const ShareHeader = ({
 					<div className="inline-flex h-11 max-w-56 items-center justify-center">
 						<Image
 							src={branding.imageUrl}
-							alt={`${branding.name} logo`}
+							alt={t("{name} logo", { name: branding.name })}
 							width={176}
 							height={32}
 							unoptimized
@@ -1324,7 +1324,7 @@ export const ShareHeader = ({
 											<VideoDownloadMenu
 												videoId={data.id}
 												hasEdits
-												triggerLabel="Download"
+												triggerLabel={t("Download")}
 												triggerClassName={clsx(
 													ACTION_BAR_BUTTON_CLASS,
 													"flex items-center justify-center border border-gray-5 bg-gray-3 text-gray-12 transition hover:bg-gray-6",
@@ -1332,7 +1332,7 @@ export const ShareHeader = ({
 												trigger={
 													<>
 														<Download className="size-3.5" aria-hidden />
-														Download
+														{t("Download")}
 													</>
 												}
 											/>
@@ -1345,7 +1345,7 @@ export const ShareHeader = ({
 												onClick={() => download("current")}
 											>
 												<Download className="size-3.5 text-gray-12" />
-												Download
+												{t("Download")}
 											</Button>
 										))}
 								</div>
@@ -1372,5 +1372,7 @@ export const ShareHeader = ({
 function ViewCount({ views }: { views: MaybePromise<number | null> }) {
 	const count = views instanceof Promise ? use(views) : views;
 	if (count === null || count === undefined) return null;
-	return <>{` · ${count} ${count === 1 ? "view" : "views"}`}</>;
+	return (
+		<>{` · ${formatNumber(count)} ${count === 1 ? t("view") : t("views")}`}</>
+	);
 }

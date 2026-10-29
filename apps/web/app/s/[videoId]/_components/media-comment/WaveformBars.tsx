@@ -1,6 +1,7 @@
 "use client";
 
 import type { MouseEvent as ReactMouseEvent, RefObject } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 /** Bars in a full-width voice note, and in a cramped one. */
 export const WAVEFORM_BAR_COUNT = 64;
@@ -161,7 +162,7 @@ export function WaveformBars({
 		<button
 			type="button"
 			tabIndex={-1}
-			aria-label="Seek within voice note"
+			aria-label={t("Seek within voice note")}
 			ref={progressRef as RefObject<HTMLButtonElement | null> | undefined}
 			onClick={seek}
 			className={`relative flex h-5 min-w-0 shrink items-center gap-px ${

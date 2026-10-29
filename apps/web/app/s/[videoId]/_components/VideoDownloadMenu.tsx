@@ -9,6 +9,7 @@ import {
 import { classNames } from "@cap/utils";
 import type { Video } from "@cap/web-domain";
 import { Download, MoreVertical } from "lucide-react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { useVideoDownload } from "./use-video-download";
 
 export function VideoDownloadMenu({
@@ -16,7 +17,7 @@ export function VideoDownloadMenu({
 	hasEdits,
 	align = "end",
 	triggerClassName,
-	triggerLabel = "Video options",
+	triggerLabel = t("Video options"),
 	trigger,
 }: {
 	videoId: Video.VideoId;
@@ -55,7 +56,7 @@ export function VideoDownloadMenu({
 						>
 							<Download className="size-3.5 shrink-0" aria-hidden />
 							<span className="text-sm text-gray-12">
-								Download current video
+								{t("Download current video")}
 							</span>
 						</DropdownMenuItem>
 						<DropdownMenuItem
@@ -64,7 +65,7 @@ export function VideoDownloadMenu({
 						>
 							<Download className="size-3.5 shrink-0" aria-hidden />
 							<span className="text-sm text-gray-12">
-								Download original video
+								{t("Download original video")}
 							</span>
 						</DropdownMenuItem>
 					</>
@@ -74,7 +75,7 @@ export function VideoDownloadMenu({
 						onClick={() => download("current")}
 					>
 						<Download className="size-3.5 shrink-0" aria-hidden />
-						<span className="text-sm text-gray-12">Download video</span>
+						<span className="text-sm text-gray-12">{t("Download video")}</span>
 					</DropdownMenuItem>
 				)}
 			</DropdownMenuContent>

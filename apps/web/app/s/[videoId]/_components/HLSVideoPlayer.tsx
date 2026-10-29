@@ -16,6 +16,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { retryVideoProcessing } from "@/actions/video/retry-processing";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { ShareCallToAction } from "@/lib/share-call-to-action";
 import { CallToActionOverlay } from "./call-to-action/CallToActionOverlay";
 import { bindCaptionTrackCueText } from "./caption-tracks";
@@ -70,11 +71,11 @@ function getProgressStatusText(
 ) {
 	switch (status) {
 		case "processing":
-			return "Processing";
+			return t("Processing");
 		case "generating_thumbnail":
-			return "Finishing up";
+			return t("Finishing up");
 		default:
-			return "Uploading";
+			return t("Uploading");
 	}
 }
 
@@ -575,10 +576,14 @@ export function HLSVideoPlayer({
 		canRetryFailedProcessing(uploadProgress, canRetryProcessing);
 	const uploadFailureMessage = sourceIsIncomplete
 		? canRetryProcessing
-			? "This recording is missing some video or audio. Reopen Cap on the recording computer to resume the upload."
-			: "This recording is missing some video or audio. Ask the owner to reopen Cap and finish the upload."
+			? t(
+					"This recording is missing some video or audio. Reopen Cap on the recording computer to resume the upload.",
+				)
+			: t(
+					"This recording is missing some video or audio. Ask the owner to reopen Cap and finish the upload.",
+				)
 		: sourceFailure === "unavailable" || hlsInitFailed
-			? "This video could not load. Check your connection and try again."
+			? t("This video could not load. Check your connection and try again.")
 			: getUploadFailureMessage(uploadProgress, canRetryProcessing);
 	useEffect(() => {
 		if (!sourceIsIncomplete) return;
@@ -600,12 +605,12 @@ export function HLSVideoPlayer({
 			});
 			toast.success(
 				result.status === "started"
-					? "Video processing restarted."
-					: "Video is still processing.",
+					? t("Video processing restarted.")
+					: t("Video is still processing."),
 			);
 		} catch (error) {
 			console.error("Failed to retry video processing", error);
-			toast.error("Could not retry video processing.");
+			toast.error(t("Could not retry video processing."));
 		} finally {
 			setIsRetryingProcessing(false);
 		}
@@ -697,7 +702,7 @@ export function HLSVideoPlayer({
 								onClick={reloadPlayback}
 								className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full"
 							>
-								Try again
+								{t("Try again")}
 							</button>
 						)}
 					{canRetryUploadProcessing && (
@@ -707,7 +712,7 @@ export function HLSVideoPlayer({
 							disabled={isRetryingProcessing}
 							className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full transition-colors disabled:opacity-60 disabled:cursor-not-allowed hover:bg-blue-600"
 						>
-							{isRetryingProcessing ? "Retrying..." : "Retry Processing"}
+							{isRetryingProcessing ? t("Retrying...") : t("Retry Processing")}
 						</button>
 					)}
 				</div>
@@ -754,7 +759,7 @@ export function HLSVideoPlayer({
 									` ${Math.round(uploadProgress.progress)}%`}
 							</span>
 							<svg className="w-4 h-4 transform -rotate-90" viewBox="0 0 20 20">
-								<title>Progress</title>
+								<title>{t("Progress")}</title>
 								<circle
 									cx="10"
 									cy="10"
@@ -840,11 +845,11 @@ export function HLSVideoPlayer({
 				{captionsSrc && (
 					<track
 						key={captionsSrc}
-						label={
+						label={t(
 							availableCaptions.find(
 								(caption) => caption.code === captionLanguage,
-							)?.name ?? "Original"
-						}
+							)?.name ?? "Original",
+						)}
 						kind="captions"
 						srcLang={
 							captionLanguage &&

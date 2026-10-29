@@ -1,6 +1,7 @@
 "use client";
 
 import { SelectContent, SelectItem, SelectRoot, SelectTrigger } from "@cap/ui";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 /**
  * Compact device picker for the recorder bars/panels: icon + truncated label
@@ -25,11 +26,13 @@ export function DevicePill({
 	title?: string;
 	className?: string;
 }) {
-	const fallbackLabel = kind === "camera" ? "Camera" : "Microphone";
+	const fallbackLabel = kind === "camera" ? t("Camera") : t("Microphone");
 	const selected = devices.find((device) => device.deviceId === selectedId);
 	const label =
 		selected?.label?.trim() ||
-		(selectedId ? fallbackLabel : `Default ${fallbackLabel.toLowerCase()}`);
+		(selectedId
+			? fallbackLabel
+			: t("Default {device}", { device: fallbackLabel.toLowerCase() }));
 
 	return (
 		<SelectRoot
@@ -40,7 +43,9 @@ export function DevicePill({
 			disabled={disabled || devices.length === 0}
 		>
 			<SelectTrigger
-				aria-label={`Select ${fallbackLabel.toLowerCase()}`}
+				aria-label={t("Select {device}", {
+					device: fallbackLabel.toLowerCase(),
+				})}
 				title={title ?? label}
 				className={`flex h-7 min-w-0 items-center gap-1 rounded-lg border-0 bg-gray-2 px-1.5 text-[11px] text-gray-11 shadow-none ring-1 ring-gray-4 transition-colors hover:bg-gray-3 hover:text-gray-12 focus:ring-gray-5 disabled:cursor-default disabled:opacity-60 [&_.caret-icon]:size-3 [&_.caret-icon]:shrink-0 ${className}`}
 			>

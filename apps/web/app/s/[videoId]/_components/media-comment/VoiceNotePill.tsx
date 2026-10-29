@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { commentMediaUrl } from "@/lib/comment-media";
 import { formatMediaDuration } from "./format-media-duration";
 import type { MediaComment } from "./media-comment-types";
@@ -192,7 +193,7 @@ export const VoiceNotePill = ({
 			<button
 				type="button"
 				onClick={toggle}
-				aria-label={playing ? "Pause voice note" : "Play voice note"}
+				aria-label={playing ? t("Pause voice note") : t("Play voice note")}
 				className="grid text-white rounded-full shrink-0 size-7 place-items-center bg-gray-12"
 			>
 				<AnimatePresence mode="wait" initial={false}>

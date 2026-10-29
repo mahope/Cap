@@ -1,6 +1,7 @@
 import { Button } from "@cap/ui";
 import type React from "react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 interface CommentInputProps {
 	onSubmit?: (content: string) => void;
@@ -27,7 +28,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
 	onCancel,
 	placeholder,
 	showCancelButton = false,
-	buttonLabel = "Reply",
+	buttonLabel = t("Reply"),
 	autoFocus = false,
 	disabled,
 	avatar,
@@ -79,7 +80,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
 							onKeyDown={handleKeyDown}
 							onFocus={() => setFocused(true)}
 							onBlur={() => setFocused(false)}
-							placeholder={placeholder || "Leave a comment..."}
+							placeholder={placeholder || t("Leave a comment...")}
 							className="w-full resize-none placeholder:text-gray-8 text-sm leading-[22px] text-gray-12 bg-transparent focus:outline-none"
 						/>
 						{expanded && (
@@ -94,7 +95,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
 								</Button>
 								{showCancelButton && onCancel && (
 									<Button size="xs" variant="outline" onClick={onCancel}>
-										Cancel
+										{t("Cancel")}
 									</Button>
 								)}
 							</div>

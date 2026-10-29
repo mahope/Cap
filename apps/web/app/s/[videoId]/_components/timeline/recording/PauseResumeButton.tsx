@@ -1,5 +1,7 @@
 "use client";
 
+import { t } from "@/app/s/[videoId]/_i18n/da";
+
 /** Pause/resume toggle shared by the voice bar, camera panel and screen card. */
 export function PauseResumeButton({
 	paused,
@@ -14,7 +16,7 @@ export function PauseResumeButton({
 		<button
 			type="button"
 			onClick={onToggle}
-			aria-label={paused ? "Resume recording" : "Pause recording"}
+			aria-label={paused ? t("Resume recording") : t("Pause recording")}
 			aria-pressed={paused}
 			className={`flex items-center justify-center ring-1 ring-gray-4 transition-colors ${
 				shape === "round" ? "size-8 rounded-full" : "size-7 rounded-lg"

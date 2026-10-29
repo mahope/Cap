@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { captureThumbnail } from "@/app/(org)/dashboard/caps/components/web-recorder-dialog/recording-conversion";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { CommentType } from "../../../Share";
 import {
 	dropLocalMediaUrl,
@@ -59,11 +60,11 @@ interface PendingVideo {
 const uploadErrorMessage = (error: unknown) => {
 	if (error instanceof CommentMediaUploadError) {
 		if (error.reason === "upgrade_required")
-			return "Media comments aren't available on this video.";
+			return t("Media comments aren't available on this video.");
 		if (error.reason === "rate_limited")
-			return "You're sending media comments too fast. Try again in a bit.";
+			return t("You're sending media comments too fast. Try again in a bit.");
 	}
-	return "Couldn't send your recording. Please try again.";
+	return t("Couldn't send your recording. Please try again.");
 };
 
 /**
@@ -175,13 +176,13 @@ export default function RecorderSurface({
 			toast.promise(pipeline, {
 				loading:
 					input.mediaKind === "video"
-						? "Sending video comment…"
-						: "Sending voice note…",
+						? t("Sending video comment…")
+						: t("Sending voice note…"),
 				// 0 means "wasn't watching yet", not a chosen moment — no stamp.
 				success:
 					timestamp > 0
-						? `Comment added at ${formatClock(timestamp)}`
-						: "Comment added",
+						? t("Comment added at {time}", { time: formatClock(timestamp) })
+						: t("Comment added"),
 				error: uploadErrorMessage,
 			});
 

@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ArrowUpRight, RotateCcw, X } from "lucide-react";
 import { motion } from "motion/react";
 import type { CSSProperties, MouseEvent } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	callToActionDestinationLabel,
 	readableTextColor,
@@ -106,7 +107,7 @@ export function CallToActionEndScreen({
 	const replayButton = onReplay && (
 		<button
 			type="button"
-			aria-label={compact ? "Replay" : undefined}
+			aria-label={compact ? t("Replay") : undefined}
 			tabIndex={interactive ? undefined : -1}
 			onClick={(event) => {
 				event.stopPropagation();
@@ -118,7 +119,7 @@ export function CallToActionEndScreen({
 			)}
 		>
 			<RotateCcw aria-hidden className="size-3.5" strokeWidth={2.25} />
-			{!compact && "Replay"}
+			{!compact && t("Replay")}
 		</button>
 	);
 
@@ -214,7 +215,7 @@ export function CallToActionCornerCard({
 	const dismissButton = (
 		<button
 			type="button"
-			aria-label="Dismiss"
+			aria-label={t("Dismiss")}
 			tabIndex={interactive ? undefined : -1}
 			onClick={(event) => {
 				event.stopPropagation();

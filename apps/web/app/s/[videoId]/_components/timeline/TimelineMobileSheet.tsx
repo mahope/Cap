@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import type { CommentType } from "../../Share";
 import { MediaCommentBody } from "../media-comment/MediaCommentBody";
@@ -46,14 +47,14 @@ export function TimelineMobileSheet({
 				>
 					<button
 						type="button"
-						aria-label="Close comments"
+						aria-label={t("Close comments")}
 						onClick={close}
 						className="absolute inset-0 bg-black/30"
 					/>
 
 					<motion.div
 						role="dialog"
-						aria-label="Comments at this point"
+						aria-label={t("Comments at this point")}
 						className="relative w-full rounded-t-2xl border-t border-gray-5 bg-white pb-[env(safe-area-inset-bottom)]"
 						initial={reduceMotion ? { opacity: 0 } : { y: "100%" }}
 						animate={reduceMotion ? { opacity: 1 } : { y: 0 }}
@@ -84,7 +85,7 @@ export function TimelineMobileSheet({
 										<span className="block overflow-hidden rounded-full size-6 shrink-0">
 											<SignedImageUrl
 												image={comment.authorImage ?? null}
-												name={comment.authorName || "Someone"}
+												name={comment.authorName || t("Someone")}
 												className="size-full"
 												letterClass="text-[10px] font-medium"
 											/>
@@ -92,7 +93,7 @@ export function TimelineMobileSheet({
 										<div className="min-w-0 flex-1">
 											<div className="flex items-center gap-2">
 												<span className="truncate text-[13px] font-medium text-gray-12">
-													{comment.authorName || "Someone"}
+													{comment.authorName || t("Someone")}
 												</span>
 												<span className="text-[11px] text-gray-9">
 													{formatTimeAgo(new Date(comment.createdAt))}

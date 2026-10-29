@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { startTransition, useEffect, useState } from "react";
 import { newComment } from "@/actions/videos/new-comment";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { CommentType } from "../../Share";
 import { AuthOverlay } from "../AuthOverlayLazy";
 import { MicGlyph } from "./TimelineBranch";
@@ -43,9 +44,9 @@ export interface TimelineComposerProps {
 }
 
 const RECORD_OPTIONS: { kind: RecordIntentKind; label: string }[] = [
-	{ kind: "screen", label: "Record screen" },
-	{ kind: "camera", label: "Record camera" },
-	{ kind: "voice", label: "Record voice note" },
+	{ kind: "screen", label: t("Record screen") },
+	{ kind: "camera", label: t("Record camera") },
+	{ kind: "voice", label: t("Record voice note") },
 ];
 
 const clampCenter = (percent: number, trackWidth: number): number => {
@@ -180,8 +181,8 @@ export function TimelineComposer({
 								</span>
 								<span className="text-xs text-gray-10">
 									{canComment
-										? "Comment at this moment"
-										: "Join the conversation"}
+										? t("Comment at this moment")
+										: t("Join the conversation")}
 								</span>
 							</div>
 
@@ -192,8 +193,10 @@ export function TimelineComposer({
 									type="text"
 									value={value}
 									maxLength={255}
-									placeholder="Add a comment"
-									aria-label={`Comment at ${formatClock(anchorTime)}`}
+									placeholder={t("Add a comment")}
+									aria-label={t("Comment at {time}", {
+										time: formatClock(anchorTime),
+									})}
 									onChange={(event) => setValue(event.target.value)}
 									onBlur={() => {
 										if (!value.trim()) closeComposer();
@@ -215,7 +218,7 @@ export function TimelineComposer({
 									onClick={requestAuth}
 									className="h-8 w-full rounded-lg bg-gray-12 text-[13px] font-medium text-white transition-opacity hover:opacity-90"
 								>
-									Sign in to comment
+									{t("Sign in to comment")}
 								</button>
 							)}
 
@@ -269,14 +272,14 @@ function RecordIcon({ kind }: { kind: RecordIntentKind }) {
 	if (kind === "camera") {
 		return (
 			<svg viewBox="0 0 16 16" className="size-4 fill-current" aria-hidden>
-				<title>Camera</title>
+				<title>{t("Camera")}</title>
 				<path d="M2.5 4A1.5 1.5 0 0 0 1 5.5v5A1.5 1.5 0 0 0 2.5 12h6A1.5 1.5 0 0 0 10 10.5v-5A1.5 1.5 0 0 0 8.5 4h-6Zm9.2 2.4 2.6-1.5c.3-.2.7 0 .7.4v5.4c0 .4-.4.6-.7.4l-2.6-1.5V6.4Z" />
 			</svg>
 		);
 	}
 	return (
 		<svg viewBox="0 0 16 16" className="size-4 fill-current" aria-hidden>
-			<title>Screen</title>
+			<title>{t("Screen")}</title>
 			<path d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm3.2 9.4h5.6a.6.6 0 1 1 0 1.2H5.2a.6.6 0 1 1 0-1.2Z" />
 		</svg>
 	);

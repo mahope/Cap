@@ -19,6 +19,7 @@ import {
 	useState,
 } from "react";
 import { finalizeDesktopSegmentsRecording } from "@/actions/video/finalize-desktop-segments";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { Tooltip } from "@/components/Tooltip";
 import { isRetryableDesktopSegmentsFinalizationError } from "@/lib/desktop-segments-retryable-errors";
 import type { ShareCallToAction } from "@/lib/share-call-to-action";
@@ -386,7 +387,7 @@ export const ShareVideo = forwardRef<
 				setConfirmStoppedError(
 					error instanceof Error
 						? error.message
-						: "Recording could not be finalized",
+						: t("Recording could not be finalized"),
 				);
 			} finally {
 				setIsConfirmingStopped(false);
@@ -649,18 +650,22 @@ export const ShareVideo = forwardRef<
 										<CheckCircle2 className="size-3" />
 									)}
 									{isConfirmingStopped
-										? "Marking as completed..."
-										: "Mark video as completed"}
+										? t("Marking as completed...")
+										: t("Mark video as completed")}
 								</button>
 								<TooltipPrimitive.Provider delayDuration={150}>
 									<Tooltip
 										position="top"
 										className="max-w-[260px] items-start text-left leading-relaxed"
-										content="We didn't receive confirmation that this recording finished uploading. Mark it as completed to publish what's been uploaded. Next time, keep the desktop app open after you stop recording until the video loads here, so all files finish uploading."
+										content={t(
+											"We didn't receive confirmation that this recording finished uploading. Mark it as completed to publish what's been uploaded. Next time, keep the desktop app open after you stop recording until the video loads here, so all files finish uploading.",
+										)}
 									>
 										<button
 											type="button"
-											aria-label="Why this recording needs to be marked as completed"
+											aria-label={t(
+												"Why this recording needs to be marked as completed",
+											)}
 											className="inline-flex size-7 items-center justify-center rounded-md border border-white/15 bg-black/65 text-white/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white"
 										>
 											<Info className="size-3.5" />
@@ -697,7 +702,7 @@ export const ShareVideo = forwardRef<
 
 								<div className="absolute left-0 top-8 transition-transform duration-300 ease-in-out origin-top scale-y-0 peer-hover:scale-y-100">
 									<p className="text-white text-xs font-medium whitespace-nowrap bg-black bg-opacity-50 px-2 py-0.5 rounded">
-										Remove watermark
+										{t("Remove watermark")}
 									</p>
 								</div>
 							</div>

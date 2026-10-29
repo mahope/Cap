@@ -7,6 +7,7 @@ import {
 	getVideoDownloadInfo,
 	type VideoDownloadVariant,
 } from "@/actions/videos/download";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 /**
  * Fetches a signed URL and saves it to disk, with a toast for the wait.
@@ -46,10 +47,12 @@ export function useVideoDownload(videoId: Video.VideoId) {
 
 			const promise = run();
 			toast.promise(promise, {
-				loading: "Preparing download...",
-				success: "Download started",
+				loading: t("Preparing download..."),
+				success: t("Download started"),
 				error: (error) =>
-					error instanceof Error ? error.message : "Failed to download video",
+					error instanceof Error
+						? error.message
+						: t("Failed to download video"),
 			});
 			promise.catch(() => undefined).finally(() => setIsDownloading(false));
 		},
