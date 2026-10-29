@@ -160,7 +160,7 @@ const translations: Record<string, string> = {
 		"Det lykkedes ikke at prøve igen. Prøv igen senere.",
 	"Finalizing transcript…": "Færdiggør transskription…",
 	"Finishing recording...": "Afslutter optagelsen...",
-	"Finishing up": "Gør færdig",
+	"Finishing up": "Afslutter",
 	Fit: "Tilpas",
 	"Formatted text": "Formateret tekst",
 	"Forward {seconds} seconds": "{seconds} sekunder frem",
