@@ -76,7 +76,7 @@ const OtpForm = ({
 	const handleVerify = useMutation({
 		mutationFn: async (pastedCode?: string) => {
 			const otpCode = pastedCode ?? code.join("");
-			if (otpCode.length !== 6) throw "Please enter a complete 6-digit code";
+			if (otpCode.length !== 6) throw t("Please enter a complete 6-digit code");
 
 			await fetch(
 				`/api/auth/callback/email?email=${encodeURIComponent(normalizedEmail)}&token=${encodeURIComponent(otpCode)}&callbackUrl=${encodeURIComponent("/dashboard")}`,

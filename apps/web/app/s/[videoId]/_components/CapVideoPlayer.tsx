@@ -925,11 +925,11 @@ export function CapVideoPlayer({
 					{captionsSrc && (
 						<track
 							key={captionsSrc}
-							label={
+							label={t(
 								availableCaptions.find(
 									(caption) => caption.code === captionLanguage,
-								)?.name ?? t("Original")
-							}
+								)?.name ?? "Original",
+							)}
 							kind="captions"
 							srcLang={
 								captionLanguage &&

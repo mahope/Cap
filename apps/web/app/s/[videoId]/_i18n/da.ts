@@ -68,7 +68,7 @@ const translations: Record<string, string> = {
 	"Chinese (Simplified)": "Kinesisk (forenklet)",
 	"Chinese (Traditional)": "Kinesisk (traditionelt)",
 	"Clean paragraphs for docs": "Rene afsnit til dokumenter",
-	"Clean paragraphs for docs, .txt": "Rene afsnit til dokumenter, .txt",
+	"Clean paragraphs for docs — .txt": "Rene afsnit til dokumenter, .txt",
 	"Click Next and your browser will ask which screen, window, or tab to share. Recording starts right away.":
 		"Klik på Næste, så spørger din browser, hvilken skærm, hvilket vindue eller hvilken fane du vil dele. Optagelsen starter med det samme.",
 	"Click Start and your browser will ask for microphone access.":
@@ -205,7 +205,7 @@ const translations: Record<string, string> = {
 	"Media comments aren't available on this video.":
 		"Mediekommentarer er ikke tilgængelige på denne video.",
 	"Media Error": "Mediefejl",
-	"Media playback was aborted": "Afspilningen blev afbrudt",
+	"Media playback was aborted": "Afspilningen blev stoppet undervejs",
 	"Media player": "Medieafspiller",
 	"Microphone is blocked. Enable it in your browser settings, then try again.":
 		"Mikrofonen er blokeret. Slå den til i din browsers indstillinger, og prøv igen.",
@@ -253,6 +253,7 @@ const translations: Record<string, string> = {
 	"Playback Interrupted": "Afspilningen blev afbrudt",
 	"Playback speed": "Afspilningshastighed",
 	Player: "Afspiller",
+	"Please enter a complete 6-digit code": "Indtast hele den 6-cifrede kode",
 	"Please wait {seconds} seconds before requesting a new code":
 		"Vent {seconds} sekunder, før du beder om en ny kode",
 	Polish: "Polsk",
@@ -262,7 +263,7 @@ const translations: Record<string, string> = {
 	"Preparing download...": "Klargør download...",
 	"Preparing video...": "Klargør video...",
 	"Preparing your recording": "Optagelsen bliver klargjort",
-	Preparing: "Forbereder",
+	Preparing: "Klargør",
 	"Preview at {time}": "Forhåndsvisning ved {time}",
 	Pricing: "Priser",
 	"Privacy Policy": "Privatlivspolitik",
@@ -270,7 +271,7 @@ const translations: Record<string, string> = {
 		"Behandlingen mislykkedes. Bed ejeren om at prøve behandlingen igen eller uploade optagelsen igen.",
 	"Processing failed.": "Behandlingen mislykkedes.",
 	Processing: "Behandler",
-	"Progress circle": "Statuscirkel",
+	"Progress Circle": "Statuscirkel",
 	Progress: "Fremskridt",
 	"Protected Video": "Beskyttet video",
 	Punjabi: "Punjabi",
@@ -403,7 +404,7 @@ const translations: Record<string, string> = {
 		"Videoen bliver stadig optaget og er tilgængelig, når optagelsen er stoppet.",
 	"tim@apple.com": "navn@firma.dk",
 	Timeline: "Tidslinje",
-	"Timestamped subtitles, .vtt": "Undertekster med tidsstempler, .vtt",
+	"Timestamped subtitles — .vtt": "Undertekster med tidsstempler, .vtt",
 	"to manage sharing.": "for at administrere deling.",
 	"Transcribing as the recording uploads…":
 		"Transskriberer, mens optagelsen uploades…",
@@ -461,7 +462,7 @@ const translations: Record<string, string> = {
 	"Watch video": "Se video",
 	"We couldn't find this video": "Vi kunne ikke finde videoen",
 	"We didn't receive confirmation that this recording finished uploading. Mark it as completed to publish what's been uploaded. Next time, keep the desktop app open after you stop recording until the video loads here, so all files finish uploading.":
-		"Vi fik ikke bekræftet, at optagelsen blev færdig med at uploade. Marker den som færdig for at udgive det, der er uploadet. Næste gang skal du holde desktop-appen åben, efter du har stoppet optagelsen, indtil videoen indlæses her, så alle filer bliver uploadet.",
+		"Vi fik ikke bekræftet, at optagelsen blev færdig med at uploade. Markér den som færdig for at udgive det, der er uploadet. Næste gang skal du holde desktop-appen åben, efter du har stoppet optagelsen, indtil videoen indlæses her, så alle filer bliver uploadet.",
 	"We sent a 6-digit code to your email.":
 		"Vi har sendt en 6-cifret kode til din e-mail.",
 	"Why this recording needs to be marked as completed":
@@ -489,7 +490,7 @@ const translations: Record<string, string> = {
 	"{n}m ago": "{n} min. siden",
 	"{n}mo ago": "{n} md. siden",
 	"{n}y ago": "{n} år siden",
-	"{percent}% volume": "{percent}% lydstyrke",
+	"{percent}% volume": "Lydstyrke {percent} %",
 	"{rate}x": "{rate}×",
 	"{rate}×": "{rate}×",
 	"{shown} of {total} uploaded": "{shown} af {total} uploadet",
@@ -512,7 +513,10 @@ export function t(
 	english: string,
 	vars?: Record<string, string | number>,
 ): string {
-	return fillPlaceholders(translations[english] ?? english, vars);
+	return fillPlaceholders(
+		Object.hasOwn(translations, english) ? translations[english] : english,
+		vars,
+	);
 }
 
 export function fromNow(date: Date): string {

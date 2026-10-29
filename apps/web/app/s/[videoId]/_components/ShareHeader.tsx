@@ -52,7 +52,7 @@ import type { VideoStatusResult } from "@/actions/videos/get-status";
 import { useDashboardContext } from "@/app/(org)/dashboard/DashboardContext";
 import type { Spaces } from "@/app/(org)/dashboard/dashboard-data";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
-import { fromNow, t } from "@/app/s/[videoId]/_i18n/da";
+import { formatNumber, fromNow, t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { Tooltip } from "@/components/Tooltip";
 import type { ShareDashboardDestination } from "@/lib/share-dashboard-destination";
@@ -1372,5 +1372,7 @@ export const ShareHeader = ({
 function ViewCount({ views }: { views: MaybePromise<number | null> }) {
 	const count = views instanceof Promise ? use(views) : views;
 	if (count === null || count === undefined) return null;
-	return <>{` · ${count} ${count === 1 ? t("view") : t("views")}`}</>;
+	return (
+		<>{` · ${formatNumber(count)} ${count === 1 ? t("view") : t("views")}`}</>
+	);
 }

@@ -857,6 +857,7 @@ export const Share = ({
 											<ShareViewToggle
 												view={view}
 												onChange={setViewAndUrl}
+												localize
 												// Fullscreen: a morph would rip the video out of the
 												// fullscreen element. Recording: leaving the timeline
 												// unmounts the recorder and silently discards the take.
@@ -1037,6 +1038,7 @@ export const Share = ({
 															<ShareViewToggle
 																view={view}
 																onChange={setViewAndUrl}
+																localize
 																disabled={stageFullscreen || timelineRecording}
 																prefetch={prefetchTimeline}
 															/>

@@ -2,7 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.unmock("@/app/s/[videoId]/_i18n/da");
 
-const { DATE_LOCALE, fromNow, t } = await import("@/app/s/[videoId]/_i18n/da");
+const { DATE_LOCALE, formatNumber, fromNow, t } = await import(
+	"@/app/s/[videoId]/_i18n/da"
+);
 
 describe("share page Danish translations", () => {
 	it("translates a known string", () => {
@@ -13,6 +15,15 @@ describe("share page Danish translations", () => {
 		expect(t("Some string nobody translated")).toBe(
 			"Some string nobody translated",
 		);
+	});
+
+	it("ignores keys inherited from Object.prototype", () => {
+		expect(t("constructor")).toBe("constructor");
+		expect(t("toString", { x: 1 })).toBe("toString");
+	});
+
+	it("formats numbers in Danish", () => {
+		expect(formatNumber(1234)).toBe("1.234");
 	});
 
 	it("fills placeholders in translated and fallback text", () => {

@@ -1,6 +1,6 @@
-import { t } from "@/app/s/[videoId]/_i18n/da";
+"use client";
 
-("use client");
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 /**
  * Mic mute toggle for the camera and screen recorder cards. A labeled pill,

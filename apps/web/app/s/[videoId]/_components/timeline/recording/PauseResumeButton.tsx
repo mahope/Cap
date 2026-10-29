@@ -1,6 +1,6 @@
-import { t } from "@/app/s/[videoId]/_i18n/da";
+"use client";
 
-("use client");
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 /** Pause/resume toggle shared by the voice bar, camera panel and screen card. */
 export function PauseResumeButton({

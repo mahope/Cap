@@ -755,7 +755,7 @@ export const Transcript: React.FC<TranscriptProps> = ({ data, onSeek }) => {
 										{t("Formatted text")}
 									</span>
 									<span className="mt-0.5 block text-[10px] text-gray-9">
-										{t("Clean paragraphs for docs, .txt")}
+										{t("Clean paragraphs for docs — .txt")}
 									</span>
 								</button>
 								<button
@@ -770,7 +770,7 @@ export const Transcript: React.FC<TranscriptProps> = ({ data, onSeek }) => {
 										{t("Captions file")}
 									</span>
 									<span className="mt-0.5 block text-[10px] text-gray-9">
-										{t("Timestamped subtitles, .vtt")}
+										{t("Timestamped subtitles — .vtt")}
 									</span>
 								</button>
 							</div>

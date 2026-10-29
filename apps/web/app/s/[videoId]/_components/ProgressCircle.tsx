@@ -161,7 +161,7 @@ const ProgressCircle = ({
 			)}
 		>
 			<svg className="transform -rotate-90 size-full" viewBox="0 0 100 100">
-				<title>{t("Progress circle")}</title>
+				<title>{t("Progress Circle")}</title>
 				<circle
 					cx="50"
 					cy="50"
