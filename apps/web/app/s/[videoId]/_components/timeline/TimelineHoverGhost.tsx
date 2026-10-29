@@ -180,7 +180,7 @@ export function TimelineHoverGhost({
 						+
 					</span>
 					<span ref={chipRef} className="whitespace-nowrap tabular-nums">
-						Add at 0:00
+						{t("Add at {time}", { time: "0:00" })}
 					</span>
 				</span>
 			</button>

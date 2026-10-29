@@ -28,7 +28,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
 	onCancel,
 	placeholder,
 	showCancelButton = false,
-	buttonLabel = "Reply",
+	buttonLabel = t("Reply"),
 	autoFocus = false,
 	disabled,
 	avatar,
