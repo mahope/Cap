@@ -513,10 +513,10 @@ export function t(
 	english: string,
 	vars?: Record<string, string | number>,
 ): string {
-	return fillPlaceholders(
-		Object.hasOwn(translations, english) ? translations[english] : english,
-		vars,
-	);
+	const translated = Object.hasOwn(translations, english)
+		? translations[english]
+		: undefined;
+	return fillPlaceholders(translated ?? english, vars);
 }
 
 export function fromNow(date: Date): string {
