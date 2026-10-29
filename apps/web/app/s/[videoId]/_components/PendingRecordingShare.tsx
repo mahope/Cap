@@ -3,6 +3,7 @@
 import { buildEnv } from "@cap/env";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { RecordingDoodle } from "@/components/paper-state/doodles";
 import {
 	PaperActions,
@@ -42,13 +43,17 @@ export function PendingRecordingShare() {
 			doodle={<RecordingDoodle />}
 			title={
 				hasTimedOut
-					? "Still preparing your recording"
-					: "Preparing your recording"
+					? t("Still preparing your recording")
+					: t("Preparing your recording")
 			}
 			lede={
 				hasTimedOut
-					? "This is taking longer than usual. Reload the page in a moment and it should be ready."
-					: "Your recording is almost ready to watch. This page will update on its own."
+					? t(
+							"This is taking longer than usual. Reload the page in a moment and it should be ready.",
+						)
+					: t(
+							"Your recording is almost ready to watch. This page will update on its own.",
+						)
 			}
 		>
 			{hasTimedOut && (
@@ -58,7 +63,7 @@ export function PendingRecordingShare() {
 						className={styles.cta}
 						onClick={() => window.location.reload()}
 					>
-						Reload page
+						{t("Reload page")}
 					</button>
 				</PaperActions>
 			)}

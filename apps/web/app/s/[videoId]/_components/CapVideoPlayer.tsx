@@ -14,6 +14,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { retryVideoProcessing } from "@/actions/video/retry-processing";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { ShareCallToAction } from "@/lib/share-call-to-action";
 import CommentStamp from "./CommentStamp";
 import { CallToActionOverlay } from "./call-to-action/CallToActionOverlay";
@@ -80,11 +81,11 @@ function getProgressStatusText(
 ) {
 	switch (status) {
 		case "processing":
-			return "Processing";
+			return t("Processing");
 		case "generating_thumbnail":
-			return "Finishing up";
+			return t("Finishing up");
 		default:
-			return "Uploading";
+			return t("Uploading");
 	}
 }
 
@@ -721,12 +722,12 @@ export function CapVideoPlayer({
 			});
 			toast.success(
 				result.status === "started"
-					? "Video processing restarted."
-					: "Video is still processing.",
+					? t("Video processing restarted.")
+					: t("Video is still processing."),
 			);
 		} catch (error) {
 			console.error("Failed to retry video processing", error);
-			toast.error("Could not retry video processing.");
+			toast.error(t("Could not retry video processing."));
 		} finally {
 			setIsRetryingProcessing(false);
 		}
@@ -794,12 +795,16 @@ export function CapVideoPlayer({
 		showPlaybackStatusBadge && resolvedSrc.data?.type === "raw";
 	const rawPlaybackBadgeLabel =
 		uploadProgressRaw?.status === "error"
-			? "Original upload"
-			: "Optimizing video";
+			? t("Original upload")
+			: t("Optimizing video");
 	const rawPlaybackBadgeDescription =
 		uploadProgressRaw?.status === "error"
-			? "The processed version is unavailable right now, so this page is playing the original uploaded file instead."
-			: "This page is temporarily playing the original uploaded file while Cap finishes processing the optimized version for smoother playback and broader compatibility.";
+			? t(
+					"The processed version is unavailable right now, so this page is playing the original uploaded file instead.",
+				)
+			: t(
+					"This page is temporarily playing the original uploaded file while Cap finishes processing the optimized version for smoother playback and broader compatibility.",
+				);
 	const blockPlaybackControls =
 		((blockPlaybackDuringProcessing || !videoLoaded) && hasActiveProgress) ||
 		showUploadFailureOverlay;
@@ -835,7 +840,7 @@ export function CapVideoPlayer({
 							disabled={isRetryingProcessing}
 							className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full transition-colors disabled:opacity-60 disabled:cursor-not-allowed hover:bg-blue-600"
 						>
-							{isRetryingProcessing ? "Retrying..." : "Retry Processing"}
+							{isRetryingProcessing ? t("Retrying...") : t("Retry Processing")}
 						</button>
 					)}
 				</div>
@@ -844,7 +849,7 @@ export function CapVideoPlayer({
 				<div className="flex absolute inset-0 flex-col px-3 gap-3 z-[20] justify-center items-center bg-black transition-opacity duration-300">
 					<AlertTriangleIcon className="text-red-500 size-12" />
 					<p className="text-gray-11 text-sm leading-relaxed text-center text-balance w-full max-w-[340px] mx-auto">
-						Could not load a playable video source. Reload to try again.
+						{t("Could not load a playable video source. Reload to try again.")}
 					</p>
 				</div>
 			)}
@@ -923,7 +928,7 @@ export function CapVideoPlayer({
 							label={
 								availableCaptions.find(
 									(caption) => caption.code === captionLanguage,
-								)?.name ?? "Original"
+								)?.name ?? t("Original")
 							}
 							kind="captions"
 							srcLang={
@@ -973,7 +978,7 @@ export function CapVideoPlayer({
 									className="w-4 h-4 transform -rotate-90"
 									viewBox="0 0 20 20"
 								>
-									<title>Progress</title>
+									<title>{t("Progress")}</title>
 									<circle
 										cx="10"
 										cy="10"

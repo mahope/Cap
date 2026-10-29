@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useId, useState } from "react";
 import { toast } from "sonner";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { trackEvent } from "@/app/utils/analytics";
 import { usePublicEnv } from "@/utils/public-env";
 import OtpForm from "./OtpForm";
@@ -46,7 +47,7 @@ export const AuthOverlay: React.FC<AuthOverlayProps> = ({
 						className="absolute top-5 left-5 cursor-pointer z-20 flex gap-2 items-center py-1.5 px-3 text-gray-12 bg-transparent border border-gray-4 rounded-full hover:bg-gray-1 transition-colors duration-300"
 					>
 						<FontAwesomeIcon className="w-2" icon={faArrowLeft} />
-						<p className="text-xs">Back</p>
+						<p className="text-xs">{t("Back")}</p>
 					</div>
 				)}
 				<div className="space-y-6">
@@ -54,12 +55,12 @@ export const AuthOverlay: React.FC<AuthOverlayProps> = ({
 
 					<div className="text-center">
 						<h1 className="text-xl font-semibold">
-							{step === 1 ? "Sign in to comment" : "Email sent"}
+							{step === 1 ? t("Sign in to comment") : t("Email sent")}
 						</h1>
 						<p className="text-base text-gray-9">
 							{step === 1
-								? "Join the conversation."
-								: "We sent a 6-digit code to your email."}
+								? t("Join the conversation.")
+								: t("We sent a 6-digit code to your email.")}
 						</p>
 					</div>
 
@@ -88,22 +89,23 @@ export const AuthOverlay: React.FC<AuthOverlayProps> = ({
 							/>
 						)}
 						<p className="mt-6 text-xs text-center text-gray-9">
-							By entering your email, you acknowledge that you have both read
-							and agree to Cap's{" "}
+							{t(
+								"By entering your email, you acknowledge that you have both read and agree to Cap's",
+							)}{" "}
 							<Link
 								href="/terms"
 								target="_blank"
 								className="text-xs font-semibold text-gray-12 hover:text-blue-300"
 							>
-								Terms of Service
+								{t("Terms of Service")}
 							</Link>{" "}
-							and{" "}
+							{t("and")}{" "}
 							<Link
 								href="/privacy"
 								target="_blank"
 								className="text-xs font-semibold text-gray-12 hover:text-blue-300"
 							>
-								Privacy Policy
+								{t("Privacy Policy")}
 							</Link>
 							.
 						</p>
@@ -183,15 +185,15 @@ const StepOne = ({
 								email_domain: normalizedEmail.split("@").at(1),
 								video_id: videoId,
 							});
-							toast.success("Email sent - check your inbox!");
+							toast.success(t("Email sent - check your inbox!"));
 						} else {
-							toast.error("Error sending email - try again?");
+							toast.error(t("Error sending email - try again?"));
 						}
 					})
 					.catch(() => {
 						setEmailSent(false);
 						setLoading(false);
-						toast.error("Error sending email - try again?");
+						toast.error(t("Error sending email - try again?"));
 					});
 			}}
 			className="flex flex-col gap-3"
@@ -202,7 +204,7 @@ const StepOne = ({
 					name="email"
 					autoFocus
 					type="email"
-					placeholder={emailSent ? "" : "tim@apple.com"}
+					placeholder={emailSent ? "" : t("tim@apple.com")}
 					autoComplete="email"
 					required
 					value={email}
@@ -220,15 +222,15 @@ const StepOne = ({
 			>
 				{emailSent
 					? NODE_ENV === "development"
-						? "Email sent to your terminal"
-						: "Email sent to your inbox"
-					: "Continue with Email"}
+						? t("Email sent to your terminal")
+						: t("Email sent to your inbox")
+					: t("Continue with Email")}
 			</Button>
 			{publicEnv.googleAuthAvailable && (
 				<>
 					<div className="flex gap-4 items-center">
 						<span className="flex-1 h-px bg-gray-5" />
-						<p className="text-sm text-center text-gray-10">OR</p>
+						<p className="text-sm text-center text-gray-10">{t("OR")}</p>
 						<span className="flex-1 h-px bg-gray-5" />
 					</div>
 					<Button
@@ -239,7 +241,7 @@ const StepOne = ({
 						disabled={loading}
 					>
 						<Image src="/google.svg" alt="Google" width={16} height={16} />
-						Login with Google
+						{t("Login with Google")}
 					</Button>
 				</>
 			)}

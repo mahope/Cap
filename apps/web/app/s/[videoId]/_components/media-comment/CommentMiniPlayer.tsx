@@ -2,6 +2,7 @@
 
 import { Dialog, DialogContent, DialogTitle } from "@cap/ui";
 import { useCallback, useLayoutEffect, useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	MediaPlayer,
 	MediaPlayerControls,
@@ -87,10 +88,10 @@ export function CommentMiniPlayer({
 				aria-describedby={undefined}
 				className="w-[calc(100vw-2rem)] max-w-3xl overflow-visible rounded-xl border-0 bg-transparent p-0 shadow-none"
 			>
-				<DialogTitle className="sr-only">Video comment</DialogTitle>
+				<DialogTitle className="sr-only">{t("Video comment")}</DialogTitle>
 				<MediaPlayer
 					autoHide
-					label="Video comment"
+					label={t("Video comment")}
 					className="mx-auto max-h-[80vh] w-full rounded-xl bg-black shadow-2xl"
 					style={{ aspectRatio: String(aspect) }}
 				>
@@ -104,7 +105,7 @@ export function CommentMiniPlayer({
 					<button
 						type="button"
 						onClick={() => handleOpenChange(false)}
-						aria-label="Close video comment"
+						aria-label={t("Close video comment")}
 						className="absolute top-2.5 right-2.5 z-20 grid size-7 place-items-center rounded-full bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-black/65"
 					>
 						<svg

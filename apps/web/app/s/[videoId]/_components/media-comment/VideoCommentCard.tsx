@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { commentMediaUrl } from "@/lib/comment-media";
 import { formatMediaDuration } from "./format-media-duration";
 import type { MediaComment } from "./media-comment-types";
@@ -177,8 +178,8 @@ export const VideoCommentCard = ({
 						<button
 							type="button"
 							onClick={expand}
-							aria-label="Open in mini player"
-							title="Open in mini player"
+							aria-label={t("Open in mini player")}
+							title={t("Open in mini player")}
 							className="grid size-6 place-items-center rounded-full bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-black/65"
 						>
 							<svg
@@ -198,7 +199,7 @@ export const VideoCommentCard = ({
 						<button
 							type="button"
 							onClick={close}
-							aria-label="Close video comment"
+							aria-label={t("Close video comment")}
 							className="grid size-6 place-items-center rounded-full bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-black/65"
 						>
 							<svg
@@ -230,7 +231,9 @@ export const VideoCommentCard = ({
 				<motion.button
 					type="button"
 					onClick={() => setPlaying(true)}
-					aria-label={`Play video comment (${formatMediaDuration(comment.mediaDuration)})`}
+					aria-label={t("Play video comment ({duration})", {
+						duration: formatMediaDuration(comment.mediaDuration),
+					})}
 					whileHover={{ scale: 1.02 }}
 					whileTap={{ scale: 0.985 }}
 					className="relative block size-full"

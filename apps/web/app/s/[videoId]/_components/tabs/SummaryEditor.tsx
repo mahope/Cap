@@ -7,6 +7,7 @@ import { LoaderCircle, Plus, Trash2 } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { editAiContent } from "@/actions/videos/edit-ai-content";
 import type { VideoStatusResult } from "@/actions/videos/get-status";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	type AiContent,
 	chaptersEqual,
@@ -105,7 +106,7 @@ export function SummaryEditor({
 			void queryClient.invalidateQueries({ queryKey });
 			onClose(true);
 		} catch {
-			setError("Couldn't save your changes. Please try again.");
+			setError(t("Couldn't save your changes. Please try again."));
 		} finally {
 			savingRef.current = false;
 			setIsSaving(false);
@@ -132,10 +133,10 @@ export function SummaryEditor({
 						htmlFor={`${id}-summary`}
 						className="block text-sm font-medium text-gray-12"
 					>
-						Summary
+						{t("Summary")}
 					</label>
 					<p id={`${id}-summary-help`} className="text-xs text-gray-10">
-						Edit the summary below. Markdown formatting is supported.
+						{t("Edit the summary below. Markdown formatting is supported.")}
 					</p>
 					<textarea
 						ref={summaryRef}
@@ -150,15 +151,17 @@ export function SummaryEditor({
 					/>
 				</div>
 				<fieldset disabled={isSaving} className="space-y-3">
-					<legend className="text-sm font-medium text-gray-12">Chapters</legend>
+					<legend className="text-sm font-medium text-gray-12">
+						{t("Chapters")}
+					</legend>
 					<p id={`${id}-time-help`} className="text-xs text-gray-10">
-						Use MM:SS or HH:MM:SS. Keep timestamps in order.
+						{t("Use MM:SS or HH:MM:SS. Keep timestamps in order.")}
 					</p>
 					{chapters.map((chapter, index) => (
 						<div key={chapter.id} className="flex gap-2 items-start">
 							<div className="w-24 shrink-0">
 								<label htmlFor={`${id}-time-${chapter.id}`} className="sr-only">
-									Chapter {index + 1} timestamp
+									{t("Chapter {n} timestamp", { n: index + 1 })}
 								</label>
 								<input
 									id={`${id}-time-${chapter.id}`}
@@ -186,7 +189,7 @@ export function SummaryEditor({
 									htmlFor={`${id}-title-${chapter.id}`}
 									className="sr-only"
 								>
-									Chapter {index + 1} title
+									{t("Chapter {n} title", { n: index + 1 })}
 								</label>
 								<input
 									id={`${id}-title-${chapter.id}`}
@@ -201,13 +204,13 @@ export function SummaryEditor({
 										)
 									}
 									maxLength={MAX_CHAPTER_TITLE_LENGTH}
-									placeholder="Chapter title"
+									placeholder={t("Chapter title")}
 									className="w-full px-2 py-2 text-sm bg-gray-1 border border-gray-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-9"
 								/>
 							</div>
 							<button
 								type="button"
-								aria-label={`Remove chapter ${index + 1}`}
+								aria-label={t("Remove chapter {n}", { n: index + 1 })}
 								onClick={() =>
 									setChapters((current) =>
 										current.filter((item) => item.id !== chapter.id),
@@ -240,7 +243,7 @@ export function SummaryEditor({
 							);
 						}}
 					>
-						<Plus className="mr-1.5 size-4" /> Add chapter
+						<Plus className="mr-1.5 size-4" /> {t("Add chapter")}
 					</Button>
 				</fieldset>
 			</div>
@@ -258,7 +261,7 @@ export function SummaryEditor({
 						disabled={isSaving}
 						onClick={() => onClose(false)}
 					>
-						Cancel
+						{t("Cancel")}
 					</Button>
 					<Button
 						type="submit"
@@ -269,7 +272,7 @@ export function SummaryEditor({
 						{isSaving && (
 							<LoaderCircle className="mr-1.5 size-4 animate-spin" />
 						)}
-						{isSaving ? "Saving…" : "Save changes"}
+						{isSaving ? t("Saving…") : t("Save changes")}
 					</Button>
 				</div>
 			</div>

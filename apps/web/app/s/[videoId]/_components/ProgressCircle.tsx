@@ -3,6 +3,7 @@
 import type { Video } from "@cap/web-domain";
 import clsx from "clsx";
 import { Effect, Option } from "effect";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { useEffectQuery, useRpcClient } from "@/lib/EffectRuntime";
 import {
 	DAY,
@@ -144,11 +145,11 @@ const ProgressCircle = ({
 	const getStatusText = () => {
 		switch (status) {
 			case "processing":
-				return "Processing";
+				return t("Processing");
 			case "generating_thumbnail":
-				return "Finishing up";
+				return t("Finishing up");
 			default:
-				return "Uploading";
+				return t("Uploading");
 		}
 	};
 
@@ -160,7 +161,7 @@ const ProgressCircle = ({
 			)}
 		>
 			<svg className="transform -rotate-90 size-full" viewBox="0 0 100 100">
-				<title>Progress Circle</title>
+				<title>{t("Progress circle")}</title>
 				<circle
 					cx="50"
 					cy="50"

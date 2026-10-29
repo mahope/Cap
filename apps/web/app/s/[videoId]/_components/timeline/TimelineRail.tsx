@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { memo, type RefObject, useCallback, useEffect, useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { usePlayback } from "../playback/PlaybackContext";
 import { useTimelineActions, useTimelineWindowRef } from "./TimelineProvider";
 import { TimelineWaveform } from "./TimelineWaveform";
@@ -123,7 +124,7 @@ export function TimelineRail({
 			ref={railRef}
 			role="slider"
 			tabIndex={0}
-			aria-label="Seek"
+			aria-label={t("Seek")}
 			aria-orientation="horizontal"
 			aria-valuemin={0}
 			aria-valuemax={Math.max(0, Math.round(duration))}

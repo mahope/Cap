@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import type React from "react";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { LinkifiedText } from "@/components/LinkifiedText";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { Tooltip } from "@/components/Tooltip";
@@ -58,7 +59,7 @@ const CommentComponent: React.FC<{
 			: [];
 
 	const handleDelete = () => {
-		if (window.confirm("Are you sure you want to delete this comment?")) {
+		if (window.confirm(t("Are you sure you want to delete this comment?"))) {
 			onDelete(comment.id, comment.parentCommentId);
 		}
 	};
@@ -113,7 +114,7 @@ const CommentComponent: React.FC<{
 				>
 					<div className="flex gap-3 justify-between items-center">
 						<p className="text-sm font-medium truncate text-gray-12">
-							{comment.authorName || "Anonymous"}
+							{comment.authorName || t("Anonymous")}
 						</p>
 						<div className="flex gap-2 items-center text-nowrap min-w-fit">
 							<Tooltip content={formatTimestamp(commentDate)}>
@@ -152,7 +153,7 @@ const CommentComponent: React.FC<{
 					)}
 					<div className="flex items-center pt-2 mt-2.5 space-x-3 border-t border-gray-3">
 						{user && !isReplying && canReply && (
-							<Tooltip content="Reply">
+							<Tooltip content={t("Reply")}>
 								<Button
 									onClick={() => onReply(comment.id)}
 									size="icon"
@@ -165,7 +166,7 @@ const CommentComponent: React.FC<{
 							</Tooltip>
 						)}
 						{isOwnComment && (
-							<Tooltip content="Delete comment">
+							<Tooltip content={t("Delete comment")}>
 								<Button
 									onClick={handleDelete}
 									size="icon"
@@ -186,7 +187,7 @@ const CommentComponent: React.FC<{
 					<CommentInput
 						onSubmit={handleReply}
 						onCancel={onCancelReply}
-						placeholder="Write a reply..."
+						placeholder={t("Write a reply...")}
 						showCancelButton={true}
 						autoFocus={true}
 					/>

@@ -6,6 +6,8 @@
  * that chunk.
  */
 
+import { t } from "@/app/s/[videoId]/_i18n/da";
+
 export type UploadProgress =
 	| { status: "fetching" }
 	| {
@@ -98,16 +100,20 @@ export function getUploadFailureMessage(
 ): string {
 	if (uploadProgress?.status === "error") {
 		if (canRetryFailedProcessing(uploadProgress, canRetryProcessing)) {
-			return uploadProgress.errorMessage || "Processing failed.";
+			return uploadProgress.errorMessage || t("Processing failed.");
 		}
 
 		return (
 			uploadProgress.errorMessage ||
-			"Processing failed. Ask the owner to retry processing or re-upload the recording."
+			t(
+				"Processing failed. Ask the owner to retry processing or re-upload the recording.",
+			)
 		);
 	}
 
-	return "Upload stalled before processing finished. Re-upload the recording to continue.";
+	return t(
+		"Upload stalled before processing finished. Re-upload the recording to continue.",
+	);
 }
 
 export const SECOND = 1000;
@@ -134,20 +140,20 @@ export function getStalledProcessingMessage(input: {
 
 	if (input.phase === "processing") {
 		if (input.processingProgress === 0 && ageMs > STALE_PROCESSING_START_MS) {
-			return "Video processing did not start. Retry processing.";
+			return t("Video processing did not start. Retry processing.");
 		}
 
 		if (ageMs > STALE_PROCESSING_PROGRESS_MS) {
-			return "Video processing stalled. Retry processing.";
+			return t("Video processing stalled. Retry processing.");
 		}
 	}
 
 	if (input.phase === "generating_thumbnail" && ageMs > STALE_THUMBNAIL_MS) {
-		return "Video finishing stalled. Retry processing.";
+		return t("Video finishing stalled. Retry processing.");
 	}
 
 	if (input.phase === "complete" && ageMs > STALE_THUMBNAIL_MS) {
-		return "Video finishing stalled. Retry processing.";
+		return t("Video finishing stalled. Retry processing.");
 	}
 
 	return null;

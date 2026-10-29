@@ -4,6 +4,7 @@ import type { ImageUpload } from "@cap/web-domain";
 import clsx from "clsx";
 import { motion } from "motion/react";
 import { memo, type ReactNode } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { NODE_SIZE } from "./timeline-constants";
 
@@ -100,8 +101,15 @@ export const TimelineBranch = memo(function TimelineBranch({
 }: TimelineBranchProps) {
 	const label =
 		glyph === "emoji"
-			? `Reaction ${content} by ${authorName} at ${timeLabel}`
-			: `Comment by ${authorName} at ${timeLabel}`;
+			? t("Reaction {content} by {name} at {time}", {
+					content,
+					name: authorName,
+					time: timeLabel,
+				})
+			: t("Comment by {name} at {time}", {
+					name: authorName,
+					time: timeLabel,
+				});
 
 	return (
 		<BranchAnchor
@@ -190,14 +198,14 @@ function BranchGlyphContent({
 /** Inline rather than an icon-pack import: two paths, no tree-shaking bet. */
 export const PlayGlyph = () => (
 	<svg viewBox="0 0 12 12" className="size-4 fill-current" aria-hidden>
-		<title>Video comment</title>
+		<title>{t("Video comment")}</title>
 		<path d="M4 2.6c0-.5.5-.8.9-.5l4 3.4c.3.3.3.7 0 1l-4 3.4c-.4.3-.9 0-.9-.5V2.6Z" />
 	</svg>
 );
 
 export const MicGlyph = () => (
 	<svg viewBox="0 0 12 12" className="size-4 fill-current" aria-hidden>
-		<title>Voice note</title>
+		<title>{t("Voice note")}</title>
 		<path d="M6 1.2a1.6 1.6 0 0 0-1.6 1.6v2.6a1.6 1.6 0 1 0 3.2 0V2.8A1.6 1.6 0 0 0 6 1.2Z" />
 		<path d="M3 5.2a.5.5 0 0 0-1 0 4 4 0 0 0 3.5 3.97v1.13a.5.5 0 0 0 1 0V9.17A4 4 0 0 0 10 5.2a.5.5 0 0 0-1 0 3 3 0 0 1-6 0Z" />
 	</svg>

@@ -1,6 +1,7 @@
 "use client";
 
 import { type RefObject, useEffect, useRef } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { useTimelineWindowRef } from "./TimelineProvider";
 import {
 	fractionInWindow,
@@ -101,7 +102,7 @@ export function TimelineHoverGhost({
 			const clampedX = Math.min(Math.max(x, half + 6), width - half - 6);
 			card.style.left = `${clampedX - x}px`;
 
-			const label = `Add at ${formatClock(time)}`;
+			const label = t("Add at {time}", { time: formatClock(time) });
 			if (label !== lastLabel) {
 				lastLabel = label;
 				chip.textContent = label;

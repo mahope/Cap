@@ -1,4 +1,6 @@
-"use client";
+import { t } from "@/app/s/[videoId]/_i18n/da";
+
+("use client");
 
 /**
  * Mic mute toggle for the camera and screen recorder cards. A labeled pill,
@@ -20,7 +22,7 @@ export function MicMuteButton({
 		<button
 			type="button"
 			onClick={onToggle}
-			aria-label={muted ? "Unmute microphone" : "Mute microphone"}
+			aria-label={muted ? t("Unmute microphone") : t("Mute microphone")}
 			aria-pressed={muted}
 			className={`flex items-center justify-center text-xs font-medium transition-colors ${
 				shape === "round" ? "h-8 rounded-full px-3" : "h-7 rounded-lg px-2.5"
@@ -30,7 +32,7 @@ export function MicMuteButton({
 					: "bg-red-50 text-red-600 ring-1 ring-red-200 hover:bg-red-100"
 			}`}
 		>
-			{muted ? "Unmute" : "Mute"}
+			{muted ? t("Unmute") : t("Mute")}
 		</button>
 	);
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { t as translate } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import type { CommentType } from "../../Share";
 import { MediaCommentBody } from "../media-comment/MediaCommentBody";
@@ -121,7 +122,7 @@ function SingleCard({
 	reduceMotion: boolean;
 	onSeek: (time: number) => void;
 }) {
-	const name = comment.authorName || "Someone";
+	const name = comment.authorName || translate("Someone");
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -162,7 +163,9 @@ function SingleCard({
 
 			{replies > 0 && (
 				<span className="text-xs text-gray-9">
-					{replies} {replies === 1 ? "reply" : "replies"}
+					{replies === 1
+						? translate("{n} reply", { n: replies })
+						: translate("{n} replies", { n: replies })}
 				</span>
 			)}
 		</div>
@@ -179,7 +182,7 @@ function ClusterCard({
 	return (
 		<div className="flex flex-col gap-0.5">
 			<span className="px-1 pb-1 text-[11px] font-medium uppercase tracking-wide text-gray-9">
-				{comments.length} comments
+				{translate("{n} comments", { n: comments.length })}
 			</span>
 			{comments.map((comment) => (
 				<button
@@ -191,19 +194,19 @@ function ClusterCard({
 					<span className="block overflow-hidden rounded-full size-5 shrink-0">
 						<SignedImageUrl
 							image={comment.authorImage ?? null}
-							name={comment.authorName || "Someone"}
+							name={comment.authorName || translate("Someone")}
 							className="size-full"
 							letterClass="text-[9px] font-medium"
 						/>
 					</span>
 					<span className="min-w-0 flex-1 truncate text-[13px] text-gray-11">
 						<span className="font-medium text-gray-12">
-							{comment.authorName || "Someone"}
+							{comment.authorName || translate("Someone")}
 						</span>{" "}
 						{isMediaComment(comment)
 							? comment.type === "video"
-								? "sent a video"
-								: "sent a voice note"
+								? translate("sent a video")
+								: translate("sent a voice note")
 							: comment.content}
 					</span>
 					<span className="font-mono text-[11px] tabular-nums text-gray-9">

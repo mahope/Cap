@@ -1,6 +1,7 @@
 import type { ImageUpload } from "@cap/web-domain";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 
 interface CommentStampsProps {
@@ -75,7 +76,7 @@ const CommentStamp: React.FC<CommentStampsProps> = ({
 						{/* Comment content */}
 						<div className="flex-1 min-w-0">
 							<div className="text-sm font-medium text-white truncate">
-								{comment.authorName || "Anonymous"}
+								{comment.authorName || t("Anonymous")}
 							</div>
 							<div className="text-xs truncate text-gray-11">
 								{comment.content}

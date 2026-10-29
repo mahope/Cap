@@ -2,6 +2,7 @@
 
 import { Switch } from "@cap/ui";
 import { useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 interface SettingOption {
 	id: string;
@@ -14,23 +15,23 @@ export const Settings = () => {
 	const [settings, setSettings] = useState<SettingOption[]>([
 		{
 			id: "allow_comments",
-			label: "Allow Comments",
-			description: "Define what viewers can see and do.",
+			label: t("Allow Comments"),
+			description: t("Define what viewers can see and do."),
 			enabled: true,
 		},
 		{
 			id: "allow_anonymous_comments",
-			label: "Allow Anonymous Comments",
+			label: t("Allow Anonymous Comments"),
 			enabled: false,
 		},
 		{
 			id: "enable_transcript",
-			label: "Enable Transcript",
+			label: t("Enable Transcript"),
 			enabled: true,
 		},
 		{
 			id: "enable_download",
-			label: "Enable Download",
+			label: t("Enable Download"),
 			enabled: true,
 		},
 	]);
@@ -46,7 +47,7 @@ export const Settings = () => {
 	return (
 		<div className="flex flex-col h-full">
 			<div className="p-4 border-b border-gray-200">
-				<h3 className="text-sm font-medium">Settings</h3>
+				<h3 className="text-sm font-medium">{t("Settings")}</h3>
 			</div>
 			<div className="overflow-y-auto flex-1">
 				<div className="p-4 space-y-6">

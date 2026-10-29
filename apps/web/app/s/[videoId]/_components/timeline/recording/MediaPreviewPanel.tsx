@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	MediaPlayer,
 	MediaPlayerControls,
@@ -49,7 +50,7 @@ export function MediaPreviewPanel({
 			<div className="relative aspect-video w-full overflow-hidden rounded-xl bg-gray-3">
 				{previewUrl && (
 					<MediaPlayer
-						label="Recording preview"
+						label={t("Recording preview")}
 						className="size-full rounded-xl bg-black"
 					>
 						<MediaPlayerVideo
@@ -84,14 +85,14 @@ export function MediaPreviewPanel({
 					onClick={onDiscard}
 					className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12"
 				>
-					Retake
+					{t("Retake")}
 				</button>
 				<button
 					type="button"
 					onClick={onSend}
 					className="h-7 rounded-lg bg-blue-9 px-3.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
 				>
-					Send
+					{t("Send")}
 				</button>
 			</div>
 		</div>

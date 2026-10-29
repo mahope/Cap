@@ -28,6 +28,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { after } from "next/server";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	getPendingLoomProcessing,
 	startDeferredLoomProcessing,
@@ -69,14 +70,14 @@ export async function generateMetadata(
 		Effect.catchTags({
 			PolicyDenied: () =>
 				Effect.succeed({
-					title: "Cap: This video is private",
-					description: "This video is private and cannot be shared.",
+					title: t("Cap: This video is private"),
+					description: t("This video is private and cannot be shared."),
 					robots: "noindex, nofollow",
 				}),
 			VerifyVideoPasswordError: () =>
 				Effect.succeed({
-					title: "Cap: Password Protected Video",
-					description: "This video is password protected.",
+					title: t("Cap: Password Protected Video"),
+					description: t("This video is password protected."),
 					robots: "noindex, nofollow",
 				}),
 		}),
@@ -88,10 +89,10 @@ export async function generateMetadata(
 const renderEmbedPolicyDenied = () =>
 	Effect.succeed(
 		<div className="flex flex-col justify-center items-center min-h-screen text-center text-white bg-black">
-			<h1 className="mb-4 text-2xl font-bold">This video is private</h1>
+			<h1 className="mb-4 text-2xl font-bold">{t("This video is private")}</h1>
 			<p className="text-gray-400">
-				If you own this video, please <Link href="/login">sign in</Link> to
-				manage sharing.
+				{t("If you own this video, please")}{" "}
+				<Link href="/login">{t("sign in")}</Link> {t("to manage sharing.")}
 			</p>
 		</div>,
 	);
@@ -311,7 +312,7 @@ async function EmbedContent({
 	if (video.isScreenshot === true) {
 		return (
 			<div className="flex justify-center items-center min-h-screen text-white bg-black">
-				<p>Screenshots cannot be embedded</p>
+				<p>{t("Screenshots cannot be embedded")}</p>
 			</div>
 		);
 	}
@@ -338,10 +339,13 @@ async function EmbedContent({
 			<div className="flex flex-col gap-3 justify-center items-center px-6 min-h-screen text-center bg-black">
 				<Logo className="w-auto h-7" white />
 				<h1 className="text-lg font-semibold text-white">
-					This video is over its free limit
+					{t("This video is over its free limit")}
 				</h1>
 				<p className="max-w-sm text-sm leading-relaxed text-white/60">
-					{`The owner of this video has used all ${Video.FREE_PLAN_SHAREABLE_LINKS_PER_MONTH} shareable links included with Cap's free plan this month. As soon as they upgrade to Cap Pro, this video will be instantly viewable.`}
+					{t(
+						"The owner of this video has used all {limit} shareable links included with Cap's free plan this month. As soon as they upgrade to Cap Pro, this video will be instantly viewable.",
+						{ limit: Video.FREE_PLAN_SHAREABLE_LINKS_PER_MONTH },
+					)}
 				</p>
 				<a
 					href={`${buildEnv.NEXT_PUBLIC_WEB_URL}/s/${video.id}`}
@@ -349,7 +353,7 @@ async function EmbedContent({
 					rel="noreferrer"
 					className="mt-2 rounded-full border border-gray-5 bg-gray-3 px-5 py-2 text-sm font-medium text-gray-12 transition-colors hover:bg-gray-6"
 				>
-					Open on Cap
+					{t("Open on Cap")}
 				</a>
 			</div>
 		);

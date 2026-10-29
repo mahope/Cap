@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Check, CodeXml, Link2, Lock, Megaphone, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	FacebookIcon,
 	GoogleIcon,
@@ -40,33 +41,33 @@ const SHARE_TARGETS: {
 }[] = [
 	{
 		id: "linkedin",
-		label: "Share on LinkedIn",
+		label: t("Share on LinkedIn"),
 		Icon: LinkedInIcon,
 		iconClassName: "size-6",
 	},
 	{
 		id: "x",
-		label: "Share on X",
+		label: t("Share on X"),
 		Icon: XIcon,
 		iconClassName: "size-[18px] text-gray-12",
 	},
 	{
 		id: "facebook",
-		label: "Share on Facebook",
+		label: t("Share on Facebook"),
 		Icon: FacebookIcon,
 		iconClassName: "size-6",
 	},
 	{
 		id: "gmail",
-		label: "Share in Gmail",
+		label: t("Share in Gmail"),
 		Icon: GoogleIcon,
 		iconClassName: "size-5",
 	},
 ];
 
 const TABS: { id: ShareTab; label: string; Icon: typeof Megaphone }[] = [
-	{ id: "social", label: "Social", Icon: Megaphone },
-	{ id: "embed", label: "Embed", Icon: CodeXml },
+	{ id: "social", label: t("Social"), Icon: Megaphone },
+	{ id: "embed", label: t("Embed"), Icon: CodeXml },
 ];
 
 /**
@@ -144,14 +145,16 @@ export const ShareLinkDialog = ({
 			} else {
 				await copyRichVideoLink({
 					url: targetUrl,
-					title: videoTitle || "Cap Recording",
+					title: videoTitle || t("Cap Recording"),
 					previewImageUrl: videoPreviewImageUrl(webUrl, videoId),
 				});
 			}
 			setCopied(true);
 		} catch {
 			toast.error(
-				tab === "embed" ? "Failed to copy embed code" : "Failed to copy link",
+				tab === "embed"
+					? t("Failed to copy embed code")
+					: t("Failed to copy link"),
 			);
 		}
 	}, [tab, embedCode, targetUrl, videoTitle, webUrl, videoId]);
@@ -165,7 +168,7 @@ export const ShareLinkDialog = ({
 			>
 				<div className="flex items-center gap-3 px-6 pt-6 pb-5">
 					<DialogTitle className="flex-1 text-2xl font-bold text-gray-12">
-						Share
+						{t("Share")}
 					</DialogTitle>
 					<div className="flex items-center gap-1">
 						{TABS.map(({ id, label, Icon }) => {
@@ -193,7 +196,7 @@ export const ShareLinkDialog = ({
 					<button
 						type="button"
 						onClick={() => onOpenChange(false)}
-						aria-label="Close"
+						aria-label={t("Close")}
 						className="rounded-lg p-1 text-gray-10 transition-colors hover:bg-gray-3 hover:text-gray-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-9"
 					>
 						<X className="size-5" aria-hidden />
@@ -206,8 +209,9 @@ export const ShareLinkDialog = ({
 							<Lock className="mt-0.5 size-4 shrink-0 text-amber-600" />
 							<div className="min-w-0 flex-1">
 								<p className="text-sm text-amber-900">
-									This Cap isn't public, so anyone you share it with will be
-									asked to sign in and will need access.
+									{t(
+										"This Cap isn't public, so anyone you share it with will be asked to sign in and will need access.",
+									)}
 								</p>
 								{canManageAccess && onManageAccess && (
 									<button
@@ -215,7 +219,7 @@ export const ShareLinkDialog = ({
 										onClick={onManageAccess}
 										className="mt-1 text-sm font-semibold text-amber-900 underline underline-offset-2 hover:text-amber-600"
 									>
-										Change access
+										{t("Change access")}
 									</button>
 								)}
 							</div>
@@ -230,7 +234,7 @@ export const ShareLinkDialog = ({
 									href={shareTargetHref({
 										target: id,
 										url: targetUrl,
-										title: videoTitle || "Cap Recording",
+										title: videoTitle || t("Cap Recording"),
 									})}
 									target="_blank"
 									rel="noopener noreferrer"
@@ -253,8 +257,9 @@ export const ShareLinkDialog = ({
 								</code>
 							</div>
 							<p className="text-sm text-gray-10">
-								Paste this wherever HTML is allowed. The player keeps its aspect
-								ratio and fills the width it's given.
+								{t(
+									"Paste this wherever HTML is allowed. The player keeps its aspect ratio and fills the width it's given.",
+								)}
 							</p>
 						</div>
 					)}
@@ -274,10 +279,10 @@ export const ShareLinkDialog = ({
 							<Link2 className="size-5" aria-hidden />
 						)}
 						{copied
-							? "Copied"
+							? t("Copied")
 							: tab === "embed"
-								? "Copy embed code"
-								: "Copy link"}
+								? t("Copy embed code")
+								: t("Copy link")}
 					</button>
 
 					<label className="flex cursor-pointer items-center gap-3 text-[15px] font-medium text-gray-12">
@@ -299,7 +304,7 @@ export const ShareLinkDialog = ({
 						>
 							{withTimestamp && <Check className="size-4" strokeWidth={3} />}
 						</span>
-						Share video at {formatClock(startTime)}
+						{t("Share video at {time}", { time: formatClock(startTime) })}
 					</label>
 				</div>
 			</DialogContent>

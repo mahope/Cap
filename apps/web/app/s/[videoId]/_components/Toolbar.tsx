@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import { startTransition, useEffect, useState } from "react";
 import { newComment } from "@/actions/videos/new-comment";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { CommentType } from "../Share";
 import type { VideoData } from "../types";
 import { AuthOverlay } from "./AuthOverlayLazy";
@@ -263,7 +264,7 @@ export const Toolbar = ({
 								type="text"
 								value={comment}
 								onChange={(e) => setComment(e.target.value)}
-								placeholder="Add a comment"
+								placeholder={t("Add a comment")}
 								className="flex-grow px-3 h-full outline-none"
 								maxLength={255}
 								onKeyDown={(e) => {
@@ -301,7 +302,7 @@ export const Toolbar = ({
 										handleCommentSubmit();
 									}}
 								>
-									Comment
+									{t("Comment")}
 								</MotionButton>
 								<MotionButton
 									variant="gray"
@@ -312,7 +313,7 @@ export const Toolbar = ({
 										setComment("");
 									}}
 								>
-									Cancel
+									{t("Cancel")}
 								</MotionButton>
 							</motion.div>
 						</motion.div>
@@ -357,7 +358,7 @@ export const Toolbar = ({
 										size="sm"
 										className="mx-auto w-fit"
 									>
-										Comment
+										{t("Comment")}
 									</MotionButton>
 								</div>
 							)}

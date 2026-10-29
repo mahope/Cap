@@ -16,6 +16,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useMediaRecorderSetup } from "@/app/(org)/dashboard/caps/components/web-recorder-dialog/useMediaRecorderSetup";
 import { useRecordingTimer } from "@/app/(org)/dashboard/caps/components/web-recorder-dialog/useRecordingTimer";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 export type CommentRecorderMode = "camera" | "screen";
 
@@ -239,21 +240,21 @@ export function useCommentRecorder(options: {
 			const videoTrack = stream.getVideoTracks()[0];
 			if (!videoTrack || videoTrack.readyState === "ended") {
 				failRecording(
-					"The recording source ended before recording could start.",
+					t("The recording source ended before recording could start."),
 				);
 				return;
 			}
 			const hasAudio = stream.getAudioTracks().length > 0;
 			const pipeline = selectCommentVideoPipeline(hasAudio);
 			if (!pipeline) {
-				failRecording("Recording isn't supported in this browser.");
+				failRecording(t("Recording isn't supported in this browser."));
 				return;
 			}
 			let recorder: MediaRecorder;
 			try {
 				recorder = new MediaRecorder(stream, { mimeType: pipeline.mimeType });
 			} catch {
-				failRecording("Recording isn't supported in this browser.");
+				failRecording(t("Recording isn't supported in this browser."));
 				return;
 			}
 			pipelineMimeRef.current = pipeline.mimeType;
@@ -284,7 +285,7 @@ export function useCommentRecorder(options: {
 				recorder.start(200);
 			} catch {
 				failRecording(
-					"Recording couldn't start. Please choose the source again.",
+					t("Recording couldn't start. Please choose the source again."),
 				);
 				return;
 			}

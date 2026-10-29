@@ -1,6 +1,7 @@
 import type { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
 import type { ReactElement } from "react";
 import React from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 const EmptyState = ({
 	commentsDisabled,
@@ -19,18 +20,18 @@ const EmptyState = ({
 		</div>
 		<div className="space-y-1">
 			<h3 className="text-base font-medium text-gray-12">
-				{commentsDisabled ? "Disabled" : "Be the first to comment"}
+				{commentsDisabled ? t("Disabled") : t("Be the first to comment")}
 			</h3>
 			<p className="text-sm text-gray-10">
 				{commentsDisabled ? (
-					"Comments are disabled for this video"
+					t("Comments are disabled for this video")
 				) : (
 					<>
-						Hit{" "}
+						{t("Hit")}{" "}
 						<kbd className="rounded border border-gray-5 bg-gray-2 px-1 font-sans text-[11px] text-gray-11">
 							C
 						</kbd>{" "}
-						or use the box below.
+						{t("or use the box below.")}
 					</>
 				)}
 			</p>
@@ -51,7 +52,7 @@ const CommentGlyph = () => (
 		strokeLinejoin="round"
 		aria-hidden
 	>
-		<title>No comments yet</title>
+		<title>{t("No comments yet")}</title>
 		<path d="M5 8.5A2.5 2.5 0 0 1 7.5 6h17A2.5 2.5 0 0 1 27 8.5v11a2.5 2.5 0 0 1-2.5 2.5H14l-6 4.5V22H7.5A2.5 2.5 0 0 1 5 19.5v-11Z" />
 		<path d="M11 11.5h10M11 16h6" />
 	</svg>

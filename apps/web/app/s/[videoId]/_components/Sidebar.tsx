@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { forwardRef, Suspense, useState } from "react";
 import type { OrganizationSettings } from "@/app/(org)/dashboard/dashboard-data";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { VideoData } from "../types";
 import { Activity } from "./tabs/Activity";
 import type { SummaryEditingState } from "./tabs/SummaryEditor";
@@ -151,7 +152,7 @@ export const Sidebar = forwardRef<{ scrollToBottom: () => void }, SidebarProps>(
 		const canLeaveSummary = () =>
 			summaryEditingState !== "saving" &&
 			(summaryEditingState !== "dirty" ||
-				window.confirm("Discard your unsaved summary and chapter changes?"));
+				window.confirm(t("Discard your unsaved summary and chapter changes?")));
 
 		const [activeTab, setActiveTab] = useState<TabType>(defaultTab);
 		const [[page, direction], setPage] = useState([0, 0]);
@@ -159,7 +160,7 @@ export const Sidebar = forwardRef<{ scrollToBottom: () => void }, SidebarProps>(
 		const tabs = [
 			{
 				id: "activity",
-				label: "Comments",
+				label: t("Comments"),
 				disabled:
 					videoSettings?.disableComments ?? data.orgSettings?.disableComments,
 			},
@@ -168,14 +169,14 @@ export const Sidebar = forwardRef<{ scrollToBottom: () => void }, SidebarProps>(
 				: [
 						{
 							id: "summary",
-							label: "Summary",
+							label: t("Summary"),
 							disabled:
 								videoSettings?.disableSummary ??
 								data.orgSettings?.disableSummary,
 						},
 						{
 							id: "transcript",
-							label: "Transcript",
+							label: t("Transcript"),
 							disabled:
 								videoSettings?.disableTranscript ??
 								data.orgSettings?.disableTranscript,
@@ -302,8 +303,8 @@ export const Sidebar = forwardRef<{ scrollToBottom: () => void }, SidebarProps>(
 								onClick={() => {
 									if (canLeaveSummary()) onCollapse();
 								}}
-								aria-label="Hide sidebar"
-								title="Hide sidebar"
+								aria-label={t("Hide sidebar")}
+								title={t("Hide sidebar")}
 								aria-controls={sidebarId}
 								aria-expanded={true}
 								className="hidden shrink-0 items-center justify-center px-3 text-gray-9 transition-colors hover:bg-gray-1 hover:text-gray-12 lg:flex"
@@ -313,7 +314,7 @@ export const Sidebar = forwardRef<{ scrollToBottom: () => void }, SidebarProps>(
 									className="size-4 fill-current"
 									aria-hidden
 								>
-									<title>Hide sidebar</title>
+									<title>{t("Hide sidebar")}</title>
 									<path d="M5.7 3.3a.6.6 0 0 0 0 .85L9.55 8 5.7 11.85a.6.6 0 1 0 .85.85l4.27-4.27a.6.6 0 0 0 0-.86L6.55 3.3a.6.6 0 0 0-.85 0Z" />
 								</svg>
 							</button>

@@ -1,5 +1,6 @@
 import { Edit3, LoaderCircle } from "lucide-react";
 import { memo, useState } from "react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import type { TranscriptEntry } from "../utils/parse-transcript-vtt";
 
 export const TranscriptRow = memo(function TranscriptRow({
@@ -40,8 +41,8 @@ export const TranscriptRow = memo(function TranscriptRow({
 						onEdit(entry);
 					}}
 					type="button"
-					aria-label="Edit transcript entry"
-					title="Edit transcript entry"
+					aria-label={t("Edit transcript entry")}
+					title={t("Edit transcript entry")}
 					className="mt-1.5 flex size-6 shrink-0 items-center justify-center rounded-md text-gray-9 opacity-0 transition-all hover:bg-gray-4 hover:text-gray-12 focus-visible:opacity-100 group-hover:opacity-100"
 				>
 					<Edit3 className="size-3" />
@@ -72,7 +73,7 @@ export function TranscriptEditor({
 				className="w-full resize-none rounded-lg border border-gray-4 bg-gray-1 p-2.5 text-[13px] leading-[22px] text-gray-12 outline-none transition placeholder:text-gray-8 focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20"
 				rows={Math.max(2, Math.ceil(editText.length / 60))}
 				onClick={(e) => e.stopPropagation()}
-				placeholder="Edit transcript text..."
+				placeholder={t("Edit transcript text...")}
 			/>
 			<div className="mt-2 flex justify-end gap-1.5">
 				<button
@@ -84,7 +85,7 @@ export function TranscriptEditor({
 					disabled={isSaving}
 					className="inline-flex h-7 items-center rounded-full px-3 text-[11px] font-medium text-gray-11 transition hover:bg-gray-3 hover:text-gray-12 disabled:opacity-50"
 				>
-					Cancel
+					{t("Cancel")}
 				</button>
 				<button
 					type="button"
@@ -96,7 +97,7 @@ export function TranscriptEditor({
 					className="inline-flex h-7 items-center gap-1.5 rounded-full bg-gray-12 px-3 text-[11px] font-semibold text-white transition hover:bg-gray-11 disabled:pointer-events-none disabled:opacity-50"
 				>
 					{isSaving && <LoaderCircle className="size-3 animate-spin" />}
-					Save
+					{t("Save")}
 				</button>
 			</div>
 		</div>

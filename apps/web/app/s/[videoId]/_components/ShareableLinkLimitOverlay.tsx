@@ -5,13 +5,17 @@ import { Button, Logo } from "@cap/ui";
 import { Video } from "@cap/web-domain";
 import clsx from "clsx";
 import { BarChart3, Infinity as InfinityIcon, Share2 } from "lucide-react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 const LIMIT = Video.FREE_PLAN_SHAREABLE_LINKS_PER_MONTH;
 
 const PRO_BENEFITS = [
-	{ icon: Share2, label: "Unlimited shareable links" },
-	{ icon: InfinityIcon, label: "No recording length limits" },
-	{ icon: BarChart3, label: "Analytics, Cap AI and password protection" },
+	{ icon: Share2, label: t("Unlimited shareable links") },
+	{ icon: InfinityIcon, label: t("No recording length limits") },
+	{
+		icon: BarChart3,
+		label: t("Analytics, Cap AI and password protection"),
+	},
 ];
 
 export function ShareableLinkLimitOverlay({
@@ -37,12 +41,15 @@ export function ShareableLinkLimitOverlay({
 				<h3 className="mt-4 text-lg font-semibold text-white sm:text-xl">
 					{isOwner
 						? "You've run out of shareable links"
-						: "This video is over its free limit"}
+						: t("This video is over its free limit")}
 				</h3>
 				<p className="mt-2 max-w-sm text-xs leading-relaxed sm:text-sm text-white/60">
 					{isOwner
 						? `You've used all ${LIMIT} shareable links included with Cap's free plan this month. Upgrade to Cap Pro and this video becomes instantly viewable, along with everything else you record.`
-						: `The owner of this video has used all ${LIMIT} shareable links included with Cap's free plan this month. As soon as they upgrade to Cap Pro, this video will be instantly viewable.`}
+						: t(
+								"The owner of this video has used all {limit} shareable links included with Cap's free plan this month. As soon as they upgrade to Cap Pro, this video will be instantly viewable.",
+								{ limit: LIMIT },
+							)}
 				</p>
 				<div className="hidden flex-col gap-2 items-start mt-5 sm:flex">
 					{PRO_BENEFITS.map(({ icon: Icon, label }) => (
@@ -70,13 +77,15 @@ export function ShareableLinkLimitOverlay({
 						href={buildEnv.NEXT_PUBLIC_WEB_URL}
 						target="_blank"
 					>
-						Record with Cap for free
+						{t("Record with Cap for free")}
 					</Button>
 				)}
 				<p className="mt-3 text-xs text-white/40">
 					{isOwner
 						? "Videos recorded in Studio mode are saved to your device, free and unlimited."
-						: `Cap's free plan includes ${LIMIT} shareable links per month.`}
+						: t("Cap's free plan includes {limit} shareable links per month.", {
+								limit: LIMIT,
+							})}
 				</p>
 			</div>
 		</div>

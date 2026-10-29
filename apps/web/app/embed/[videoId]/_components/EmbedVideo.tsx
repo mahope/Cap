@@ -28,6 +28,7 @@ import {
 	parseVTT,
 	type TranscriptEntry,
 } from "@/app/s/[videoId]/_components/utils/transcript-utils";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatPlayerTime } from "@/lib/player-time";
 import type { SharePageBranding } from "@/lib/share-branding";
 import type { ShareCallToAction } from "@/lib/share-call-to-action";
@@ -390,7 +391,7 @@ export const EmbedVideo = forwardRef<
 									>
 										<Image
 											src={branding.imageUrl}
-											alt={`${branding.name} logo`}
+											alt={t("{name} logo", { name: branding.name })}
 											width={160}
 											height={32}
 											unoptimized
@@ -408,10 +409,10 @@ export const EmbedVideo = forwardRef<
 											window.open("https://cap.so", "_blank");
 										}}
 										className="hidden z-10 gap-2 items-center px-3 py-2 text-sm rounded-full border backdrop-blur-sm transition-colors duration-200 sm:flex border-white/10 w-fit text-white/80 hover:text-white bg-black/50"
-										aria-label="Powered by Cap"
+										aria-label={t("Powered by Cap")}
 									>
 										<span className="text-xs md:text-sm text-white/80">
-											Powered by
+											{t("Powered by")}
 										</span>
 										<Logo className="w-auto h-4" white={true} />
 									</motion.button>

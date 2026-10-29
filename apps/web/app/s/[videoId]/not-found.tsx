@@ -1,4 +1,5 @@
 import { buildEnv } from "@cap/env";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SearchDoodle } from "@/components/paper-state/doodles";
 import {
 	PaperActions,
@@ -13,18 +14,20 @@ export default function VideoNotFound() {
 		<PaperState
 			homeHref={homeHref}
 			doodle={<SearchDoodle />}
-			title="We couldn't find this video"
-			lede="It may have been deleted, or the link is missing a few characters. Check the link with whoever sent it to you."
+			title={t("We couldn't find this video")}
+			lede={t(
+				"It may have been deleted, or the link is missing a few characters. Check the link with whoever sent it to you.",
+			)}
 			footnote={
 				<>
-					Think this is a mistake? Email{" "}
+					{t("Think this is a mistake? Email")}{" "}
 					<a href="mailto:hello@cap.so">hello@cap.so</a>
 				</>
 			}
 		>
 			<PaperActions>
 				<a className={styles.cta} href={homeHref}>
-					Go to Cap
+					{t("Go to Cap")}
 				</a>
 			</PaperActions>
 		</PaperState>

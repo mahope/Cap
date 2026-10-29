@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatClock } from "../timeline-format";
 import { DevicePill } from "./DevicePill";
 import { MicMuteButton } from "./MicMuteButton";
@@ -86,7 +87,7 @@ export function ScreenRecorderPanel({
 						{formatClock(durationMs / 1000)}
 					</span>
 					<span className="text-xs text-gray-10">
-						{paused ? "Paused" : "Recording your screen"}
+						{paused ? t("Paused") : t("Recording your screen")}
 					</span>
 				</div>
 			) : (
@@ -97,7 +98,7 @@ export function ScreenRecorderPanel({
 							className="size-4 fill-current"
 							aria-hidden
 						>
-							<title>Screen</title>
+							<title>{t("Screen")}</title>
 							<path d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm3.2 9.4h5.6a.6.6 0 1 1 0 1.2H5.2a.6.6 0 1 1 0-1.2Z" />
 						</svg>
 					</span>
@@ -105,10 +106,14 @@ export function ScreenRecorderPanel({
 						{error
 							? error
 							: phase === "requesting"
-								? "Waiting for your browser's share picker…"
+								? t("Waiting for your browser's share picker…")
 								: devices.mics.length > 0
-									? "Pick a microphone, then click Next. Your browser will ask which screen, window, or tab to share, and recording starts right away."
-									: "Click Next and your browser will ask which screen, window, or tab to share. Recording starts right away."}
+									? t(
+											"Pick a microphone, then click Next. Your browser will ask which screen, window, or tab to share, and recording starts right away.",
+										)
+									: t(
+											"Click Next and your browser will ask which screen, window, or tab to share. Recording starts right away.",
+										)}
 					</p>
 				</div>
 			)}
@@ -126,9 +131,9 @@ export function ScreenRecorderPanel({
 					}
 					title={
 						live && !liveMicSwitchable
-							? "This recording has no microphone track"
+							? t("This recording has no microphone track")
 							: !live && micMuted
-								? "Microphone is off for this recording"
+								? t("Microphone is off for this recording")
 								: undefined
 					}
 					className="w-full min-w-0"
@@ -163,7 +168,7 @@ export function ScreenRecorderPanel({
 							disabled={phase === "processing"}
 							className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12 disabled:opacity-40"
 						>
-							Discard
+							{t("Discard")}
 						</button>
 						<button
 							type="button"
@@ -172,7 +177,7 @@ export function ScreenRecorderPanel({
 							className="flex h-7 items-center gap-1.5 rounded-lg bg-gray-12 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
 						>
 							<span className="inline-flex size-2 rounded-sm bg-red-400" />
-							Stop
+							{t("Stop")}
 						</button>
 					</>
 				) : (
@@ -182,7 +187,7 @@ export function ScreenRecorderPanel({
 							onClick={handleCancel}
 							className="h-7 rounded-lg px-2.5 text-xs text-gray-10 transition-colors hover:bg-gray-2 hover:text-gray-12"
 						>
-							Cancel
+							{t("Cancel")}
 						</button>
 						<button
 							type="button"
@@ -190,7 +195,7 @@ export function ScreenRecorderPanel({
 							disabled={phase === "requesting"}
 							className="h-7 rounded-lg bg-blue-9 px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
 						>
-							{error ? "Try again" : "Next"}
+							{error ? t("Try again") : t("Next")}
 						</button>
 					</>
 				)}

@@ -2,12 +2,13 @@
 
 import { classNames } from "@cap/utils";
 import { motion, useReducedMotion } from "motion/react";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 
 export type ShareView = "classic" | "timeline";
 
 const OPTIONS: { value: ShareView; label: string }[] = [
-	{ value: "classic", label: "Player" },
-	{ value: "timeline", label: "Timeline" },
+	{ value: "classic", label: t("Player") },
+	{ value: "timeline", label: t("Timeline") },
 ];
 
 interface ShareViewToggleProps {

@@ -22,6 +22,7 @@ import {
 	useState,
 } from "react";
 import type { OrganizationSettings } from "@/app/(org)/dashboard/dashboard-data";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import type { ShareDashboardDestination } from "@/lib/share-dashboard-destination";
 import {
@@ -810,7 +811,7 @@ export const Share = ({
 											)}
 											<SignedImageUrl
 												image={data.owner.image}
-												name={data.owner.name ?? "Someone"}
+												name={data.owner.name ?? t("Someone")}
 												className="size-8 shrink-0 rounded-full"
 												letterClass="text-xs font-medium"
 											/>
@@ -819,7 +820,7 @@ export const Share = ({
 													{videoStatus?.name ?? data.name}
 												</p>
 												<p className="truncate text-xs leading-tight text-gray-10">
-													{data.owner.name ?? "Someone"}
+													{data.owner.name ?? t("Someone")}
 													{" · "}
 													{formatTimeAgo(effectiveDate)}
 												</p>
@@ -836,7 +837,7 @@ export const Share = ({
 												href={TIMELINE_GUIDE_URL}
 												target="_blank"
 												rel="noreferrer"
-												title="How does the timeline work?"
+												title={t("How does the timeline work?")}
 												className="inline-flex shrink-0 items-center rounded-full border border-gray-5 bg-gray-3 p-0.5 text-xs font-medium text-gray-11 transition-colors hover:text-gray-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-9"
 											>
 												<span className="flex items-center gap-1.5 rounded-full px-3 py-1">
@@ -845,11 +846,11 @@ export const Share = ({
 														className="size-3.5 shrink-0 fill-current"
 														aria-hidden
 													>
-														<title>How does this work?</title>
+														<title>{t("How does this work?")}</title>
 														<path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 1.2a5.3 5.3 0 1 1 0 10.6A5.3 5.3 0 0 1 8 2.7Zm0 1.6c-1.2 0-2.1.7-2.4 1.8a.6.6 0 0 0 1.15.34c.16-.55.6-.94 1.25-.94.7 0 1.2.44 1.2 1.03 0 .45-.2.73-.78 1.14-.66.47-.99.94-.96 1.72a.6.6 0 0 0 1.2-.04c-.02-.35.1-.53.53-.83.75-.53 1.21-1.08 1.21-2 0-1.25-1.02-2.22-2.4-2.22Zm0 6.05a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z" />
 													</svg>
 													<span className="hidden md:inline">
-														How does this work?
+														{t("How does this work?")}
 													</span>
 												</span>
 											</a>
@@ -1058,7 +1059,7 @@ export const Share = ({
 															className="hidden absolute right-0 top-1/2 items-center justify-center gap-2 -translate-y-1/2 rounded-lg border border-gray-5 bg-white h-10 px-3 text-sm font-medium text-gray-10 shadow-sm transition-colors hover:text-gray-12 lg:flex"
 														>
 															<ChevronGlyph direction="left" />
-															Show sidebar
+															{t("Show sidebar")}
 														</button>
 													)}
 												</div>
@@ -1229,7 +1230,7 @@ function ScreenshotImage({ src, alt }: { src?: string | null; alt: string }) {
 	if (!src) {
 		return (
 			<div className="flex size-full items-center justify-center rounded-xl bg-gray-2 text-sm text-gray-10">
-				Screenshot unavailable
+				{t("Screenshot unavailable")}
 			</div>
 		);
 	}

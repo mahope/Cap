@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Edit3 } from "lucide-react";
 import { useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import { formatPlayerTime } from "@/lib/player-time";
 import { type SummaryEditingState, SummaryEditor } from "./SummaryEditor";
 
@@ -112,13 +113,13 @@ export const Summary: React.FC<SummaryProps> = ({
 			type="button"
 			variant="gray"
 			size="sm"
-			aria-label="Edit summary and chapters"
+			aria-label={t("Edit summary and chapters")}
 			onClick={() => {
 				setSaved(false);
 				setIsEditing(true);
 			}}
 		>
-			<Edit3 className="mr-1.5 size-3.5" /> Edit
+			<Edit3 className="mr-1.5 size-3.5" /> {t("Edit")}
 		</Button>
 	) : null;
 
@@ -147,7 +148,7 @@ export const Summary: React.FC<SummaryProps> = ({
 			setRetryError(
 				error instanceof Error
 					? error.message
-					: "Failed to retry AI generation",
+					: t("Failed to retry AI generation"),
 			);
 		} finally {
 			setIsRetrying(false);
@@ -177,12 +178,12 @@ export const Summary: React.FC<SummaryProps> = ({
 							</svg>
 						</div>
 						<h3 className="mb-2 text-lg font-semibold text-gray-900">
-							Unlock Cap AI
+							{t("Unlock Cap AI")}
 						</h3>
 						<p className="mb-4 text-sm leading-relaxed text-gray-600">
-							Upgrade to Cap Pro to access AI-powered features including
-							automatic titles, video summaries, and intelligent chapter
-							generation.
+							{t(
+								"Upgrade to Cap Pro to access AI-powered features including automatic titles, video summaries, and intelligent chapter generation.",
+							)}
 						</p>
 						<Button
 							href="/pricing"
@@ -190,7 +191,7 @@ export const Summary: React.FC<SummaryProps> = ({
 							size="sm"
 							className="mx-auto"
 						>
-							Upgrade to Cap Pro
+							{t("Upgrade to Cap Pro")}
 						</Button>
 					</div>
 				</div>
@@ -239,17 +240,17 @@ export const Summary: React.FC<SummaryProps> = ({
 				<div className="space-y-1">
 					<h3 className="text-base font-medium text-gray-12">
 						{aiGenerationStatus === "ERROR"
-							? "AI generation failed"
+							? t("AI generation failed")
 							: aiGenerationStatus === "SKIPPED"
-								? "AI generation skipped"
-								: "No summary available"}
+								? t("AI generation skipped")
+								: t("No summary available")}
 					</h3>
 					<p className="text-sm text-gray-10">
 						{aiGenerationStatus === "ERROR"
-							? "There was an error generating the AI summary."
+							? t("There was an error generating the AI summary.")
 							: aiGenerationStatus === "SKIPPED"
-								? "The video was too short or had no speech detected."
-								: "AI summary has not been generated for this video yet."}
+								? t("The video was too short or had no speech detected.")
+								: t("AI summary has not been generated for this video yet.")}
 					</p>
 					{canEdit && (
 						<div className="flex justify-center pt-4">{editButton}</div>
@@ -266,7 +267,7 @@ export const Summary: React.FC<SummaryProps> = ({
 									icon={faRotateRight}
 									className={`mr-2 ${isRetrying ? "animate-spin" : ""}`}
 								/>
-								{isRetrying ? "Retrying..." : "Retry AI Generation"}
+								{isRetrying ? t("Retrying...") : t("Retry AI Generation")}
 							</Button>
 							{retryError && (
 								<p className="mt-2 text-sm text-red-500">{retryError}</p>
@@ -285,14 +286,14 @@ export const Summary: React.FC<SummaryProps> = ({
 					{canEdit && (
 						<div className="flex items-center justify-between gap-2">
 							<output className="text-xs text-gray-10">
-								{saved ? "Changes saved" : "Summary and chapters"}
+								{saved ? t("Changes saved") : t("Summary and chapters")}
 							</output>
 							{editButton}
 						</div>
 					)}
 					{aiData?.summary && (
 						<div>
-							<h3 className="text-lg font-medium">Summary</h3>
+							<h3 className="text-lg font-medium">{t("Summary")}</h3>
 							<div className="text-sm text-gray-12 prose prose-sm prose-gray max-w-none prose-p:my-2 prose-ul:my-2 prose-li:my-0 prose-strong:text-gray-12">
 								<ReactMarkdown>{aiData.summary}</ReactMarkdown>
 							</div>
@@ -301,7 +302,7 @@ export const Summary: React.FC<SummaryProps> = ({
 
 					{aiData?.chapters && aiData.chapters.length > 0 && (
 						<div className={aiData?.summary ? "mt-6" : ""}>
-							<h3 className="mb-2 text-lg font-medium">Chapters</h3>
+							<h3 className="mb-2 text-lg font-medium">{t("Chapters")}</h3>
 							<div className="divide-y">
 								{aiData.chapters.map((chapter) => (
 									<button

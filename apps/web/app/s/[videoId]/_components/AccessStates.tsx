@@ -4,6 +4,7 @@ import { buildEnv } from "@cap/env";
 import type { Video } from "@cap/web-domain";
 import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/app/Layout/AuthContext";
+import { t } from "@/app/s/[videoId]/_i18n/da";
 import {
 	EnvelopeDoodle,
 	KeyDoodle,
@@ -30,7 +31,7 @@ function SwitchAccountButton({ loginUrl }: { loginUrl: string }) {
 			className={styles.cta}
 			onClick={() => signOut({ callbackUrl: loginUrl })}
 		>
-			Switch account
+			{t("Switch account")}
 		</button>
 	);
 }
@@ -44,12 +45,13 @@ export function PrivateVideoState({ videoId }: { videoId: Video.VideoId }) {
 			<PaperState
 				homeHref={buildEnv.NEXT_PUBLIC_WEB_URL}
 				doodle={<LockDoodle />}
-				title="This video is private"
+				title={t("This video is private")}
 				lede={
 					<>
-						You're signed in as <strong>{user.email}</strong>, which doesn't
-						have access. Switch to the account that was invited, or ask the
-						owner to share it with you.
+						{t("You're signed in as")} <strong>{user.email}</strong>
+						{t(
+							", which doesn't have access. Switch to the account that was invited, or ask the owner to share it with you.",
+						)}
 					</>
 				}
 			>
@@ -59,7 +61,7 @@ export function PrivateVideoState({ videoId }: { videoId: Video.VideoId }) {
 						className={`${styles.cta} ${styles.ghost}`}
 						href={`${buildEnv.NEXT_PUBLIC_WEB_URL}/dashboard`}
 					>
-						Go to my Caps
+						{t("Go to my Caps")}
 					</a>
 				</PaperActions>
 			</PaperState>
@@ -70,15 +72,17 @@ export function PrivateVideoState({ videoId }: { videoId: Video.VideoId }) {
 		<PaperState
 			homeHref={buildEnv.NEXT_PUBLIC_WEB_URL}
 			doodle={<LockDoodle />}
-			title="This video is private"
-			lede="Only people the owner invited can watch it. If that's you, sign in with the email address that was invited."
+			title={t("This video is private")}
+			lede={t(
+				"Only people the owner invited can watch it. If that's you, sign in with the email address that was invited.",
+			)}
 		>
 			<PaperActions>
 				<a className={styles.cta} href={urls.login}>
-					Sign in
+					{t("Sign in")}
 				</a>
 				<a className={`${styles.cta} ${styles.ghost}`} href={urls.signup}>
-					Create an account
+					{t("Create an account")}
 				</a>
 			</PaperActions>
 		</PaperState>
@@ -90,12 +94,14 @@ export function SignInRequiredState({ videoId }: { videoId: Video.VideoId }) {
 		<PaperState
 			homeHref={buildEnv.NEXT_PUBLIC_WEB_URL}
 			doodle={<KeyDoodle />}
-			title="Sign in to watch"
-			lede="The owner only shares this video with approved email addresses. Sign in with yours to start watching."
+			title={t("Sign in to watch")}
+			lede={t(
+				"The owner only shares this video with approved email addresses. Sign in with yours to start watching.",
+			)}
 		>
 			<PaperActions>
 				<a className={styles.cta} href={accessUrls(videoId).login}>
-					Sign in
+					{t("Sign in")}
 				</a>
 			</PaperActions>
 		</PaperState>
@@ -109,15 +115,19 @@ export function AccessRestrictedState({ videoId }: { videoId: Video.VideoId }) {
 		<PaperState
 			homeHref={buildEnv.NEXT_PUBLIC_WEB_URL}
 			doodle={<EnvelopeDoodle />}
-			title="This video is restricted"
+			title={t("This video is restricted")}
 			lede={
 				user ? (
 					<>
-						<strong>{user.email}</strong> isn't on the list of addresses the
-						owner allows. Try another account, or ask the owner for access.
+						<strong>{user.email}</strong>{" "}
+						{t(
+							"isn't on the list of addresses the owner allows. Try another account, or ask the owner for access.",
+						)}
 					</>
 				) : (
-					"Your email address isn't on the list of addresses the owner allows. Try another account, or ask the owner for access."
+					t(
+						"Your email address isn't on the list of addresses the owner allows. Try another account, or ask the owner for access.",
+					)
 				)
 			}
 		>
