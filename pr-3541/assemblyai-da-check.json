@@ -1,0 +1,26 @@
+{
+  "note": "AssemblyAI responses for the Danish test clip (synthetic TTS speech, 2m46s). Options are exactly what getAssemblyAITranscriptionOptions() produces on feat/danish-ai-language: speech_models [universal-3-5-pro, universal-2], format_text, punctuate, disfluencies.",
+  "direct_call_language_code_da": {
+    "transcript_id": "ff34d9ad-1def-44eb-be32-dd64a61b5924",
+    "status": "completed",
+    "language_code": "da",
+    "speech_model_used": "universal-3-5-pro",
+    "audio_duration_s": 166,
+    "text_starts": "Hej og velkommen til denne korte gennemgang af projektet Fyrtårn. Fyrtårn er en ny webshop for en lille cykelforhandler, og i dag vil jeg vise, hvor langt vi er kommet og hvad der mangler, før vi kan gå i luften."
+  },
+  "direct_call_auto_detect_with_expected_languages_including_da": {
+    "transcript_id": "9949d869-9878-4212-8f74-27cb25bd22a4",
+    "status": "completed",
+    "language_code": "da",
+    "language_confidence": 0.9779,
+    "speech_model_used": "universal-3-5-pro"
+  },
+  "cap_web_upload_with_org_setting_da": {
+    "transcript_id": "377e124f-ae7b-4664-93c1-d08342c7f773",
+    "status": "completed",
+    "language_code": "da",
+    "language_detection": false,
+    "speech_model_used": "universal-3-5-pro",
+    "organization_settings_aiGenerationLanguage": "da"
+  }
+}
